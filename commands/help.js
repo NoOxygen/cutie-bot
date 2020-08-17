@@ -4,7 +4,7 @@ exports.run = (client, message, args) => {
     const embed = new MessageEmbed()
       .setTitle("**__CUTIE__**")
       .setColor(0xffd1dc)
-      .setDescription(`This bot is a homebrew bot and is being created to try and reduce the number of bots we have on the server. The name is subject to change.
+      .setDescription(`This bot is a homebrew bot and is being created to try and reduce the number of bots we have on the server.
 
     Its current prefix is "qt"
 
@@ -30,11 +30,11 @@ exports.run = (client, message, args) => {
     const embed = new MessageEmbed()
       .setTitle("**__CUTIE__**")
       .setColor(0xffd1dc)
-      .setDescription(`This bot is a homebrew bot and is being created to try and reduce the number of bots we have on the server. The name is subject to change.
+      .setDescription(`This bot is a homebrew bot and is being created to try and reduce the number of bots we have on the server.
 
     Its current prefix is "qt"
 
-    __*Miscellaneous commands:*__
+    __*Miscellaneous commands*__
 
     **ping** - checks if the bot is working or not
     **aww** - sends a random image/post from r/aww`);
@@ -44,12 +44,12 @@ exports.run = (client, message, args) => {
     const embed = new MessageEmbed()
       .setTitle("**__CUTIE__**")
       .setColor(0xffd1dc)
-      .setDescription(`This bot is a homebrew bot and is being created to try and reduce the number of bots we have on the server. The name is subject to change.
+      .setDescription(`This bot is a homebrew bot and is being created to try and reduce the number of bots we have on the server.
 
     Its current prefix is "qt"
 
     __*Support commands*__
-    
+
     **spoilers** - tutorial on how to use spoilers
     **spoilers-guide** - info on when and where to use spoilers
     **hotlines** - sends a message with links containing helpline/hotlines from various countries
