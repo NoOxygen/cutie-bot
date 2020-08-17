@@ -1,0 +1,23 @@
+{
+  "name": "cutie-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "\"Siddharth Pranjale \\ <sidpranjale127@protonmail.com\\> (https://github.com/Sid127)",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sid127/cutie-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sid127/cutie-bot/issues"
+  },
+  "homepage": "https://github.com/Sid127/cutie-bot#readme",
+  "description": "",
+  "dependencies": {
+    "discord.js": "^12.3.1"
+  }
+}
