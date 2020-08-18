@@ -20,7 +20,9 @@ Its current prefix is "qt"
   const miscList = `__*Miscellaneous:*__
 
 **ping** - checks if the bot is working or not
-**aww** - sends a random image/post from r/aww`
+**aww** - sends a random image/post from r/aww
+**points** - check your points on this server
+**leaderboard** - get the top 10 users on this server`
 
   if (args.length < 1) {
     const embed = new MessageEmbed()

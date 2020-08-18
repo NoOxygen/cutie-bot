@@ -18,6 +18,7 @@
   "homepage": "https://github.com/Sid127/cutie-bot#readme",
   "description": "",
   "dependencies": {
+    "better-sqlite3": "^7.1.0",
     "discord.js": "^12.3.1",
     "enmap": "^5.6.1"
   }
