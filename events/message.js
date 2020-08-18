@@ -12,7 +12,7 @@ module.exports = (client, message) => {
       user: message.author.id,
       guild: message.guild.id,
       points: 0,
-      level: 1,
+      level: 0,
       username: message.member.user.tag
     });
 
@@ -23,7 +23,8 @@ module.exports = (client, message) => {
 
     // Act upon level up by sending a message and updating the user's level in enmap.
     if (client.points.get(key, "level") < curLevel) {
-      message.reply(`You've leveled up to level **${curLevel}**! Ain't that dandy?`);
+      const botChannel = message.guild.channels.cache.find(channel => channel.name === "bot").id;
+      client.channels.cache.get(botChannel).send(`<@${message.author.id}> leveled up to level **${curLevel}**! :)`);
       client.points.set(key, curLevel, "level");
     }
   }
