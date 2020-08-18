@@ -1,7 +1,7 @@
 exports.run = (client, message, [mention, ...reason]) => {
-  const modRole = message.guild.roles.cache.find(role => role.name === "Mods");
+  const modRole = message.guild.roles.cache.find(role => role.name === "staff");
   if (!modRole)
-    return console.log("The Mods role does not exist");
+    return console.log("The staff role does not exist");
 
   if (!message.member.roles.cache.has(modRole.id))
     return message.reply("You can't use this command.");
