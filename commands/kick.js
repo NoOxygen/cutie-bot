@@ -4,10 +4,10 @@ exports.run = (client, message, [mention, ...reason]) => {
     return console.log("The staff role does not exist");
 
   if (!message.member.roles.cache.has(modRole.id))
-    return message.reply("You can't use this command.");
+    return message.reply("you can't use this command.");
 
   if (message.mentions.members.size === 0)
-    return message.reply("Please mention a user to kick");
+    return message.reply("please mention a user to kick");
 
   if (!message.guild.me.hasPermission("KICK_MEMBERS"))
     return message.reply("");

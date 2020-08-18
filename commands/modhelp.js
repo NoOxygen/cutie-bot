@@ -1,7 +1,7 @@
 exports.run = (client, message, [mention, ...reason]) => {
   const { Client, MessageEmbed } = require('discord.js');
   if (!message.member.roles.cache.some(r=>["staff", "aide", "admin"].includes(r.name)))
-    return message.reply("You can't use this command.");
+    return message.reply("you can't use this command.");
 
   const header = `This bot is a homebrew bot and is being made by one (1) person as a community project/hobby. Support for the bot is NOT guaranteed.
 
