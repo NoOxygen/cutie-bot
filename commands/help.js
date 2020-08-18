@@ -1,6 +1,6 @@
 exports.run = (client, message, args) => {
   const { Client, MessageEmbed } = require('discord.js');
-  const header = `This bot is a homebrew bot and is being created to try and reduce the number of bots we have on the server.
+  const header = `This bot is a homebrew bot and is being made by one (1) person as a community project/hobby. Support for the bot is NOT guaranteed.
 
 Its current prefix is "qt"
 
@@ -24,6 +24,8 @@ Its current prefix is "qt"
 **points** - check your points on this server
 **leaderboard** - get the top 10 users on this server`
 
+  const oSS = `This bot is open-source! Check out the source code at https://github.com/Sid127/cutie-bot`
+
   if (args.length < 1) {
     const embed = new MessageEmbed()
       .setTitle("**__CUTIE__**")
@@ -33,7 +35,9 @@ ${header}
 
 ${supportList}
 
-${miscList}`);
+${miscList}
+
+${oSS}`);
     message.channel.send(embed);
   }
   else if (args[0] === "misc") {
@@ -43,7 +47,9 @@ ${miscList}`);
       .setDescription(`
 ${header}
 
-${miscList}`);
+${miscList}
+
+${oSS}`);
     message.channel.send(embed);
   }
   else if (args[0] === "support") {
@@ -53,7 +59,9 @@ ${miscList}`);
       .setDescription(`
 ${header}
 
-${supportList}`);
+${supportList}
+
+${oSS}`);
     message.channel.send(embed);
   }
 }
