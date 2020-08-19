@@ -1,7 +1,7 @@
 module.exports = client => {
   // set activity status
-  client.user.setActivity(`qt help | v1.1`, {type: "LISTENING"});
+  client.user.setActivity(`qt help | v1.2`, {type: "LISTENING"});
 
   // tell host that bot is online
-  console.log(`CUTIE v1.1.0 is now online`);
+  console.log(`CUTIE v1.2 is now online`);
 };
