@@ -27,6 +27,12 @@ module.exports = (client, message) => {
       client.channels.cache.get(botChannel).send(`<@${message.author.id}> leveled up to level **${curLevel}**! :)`);
       client.points.set(key, curLevel, "level");
     }
+    if (client.points.get(key, "level") === 3) {
+      const rankRole = message.guild.roles.cache.find(role => role.name === "active")
+      if (!rankRole) return;
+
+      message.member.roles.add(rankRole).catch(console.error)
+    }
   }
 
   // Ignore messages not starting with the prefix (in config.json)
@@ -57,6 +63,88 @@ module.exports = (client, message) => {
       embed.addField(`${data.username}`, `${data.points} points (level ${data.level})`);
     }
     return message.channel.send({embed});
+  }
+
+  if(command === "give") {
+    // Limited to mods- adjust to your own preference!
+    if (!message.member.roles.cache.some(r=>["staff", "admin"].includes(r.name)))
+      return message.reply("you can't use this command.");
+
+    const user = message.mentions.users.first();
+    if(!user) return message.reply("You must mention!");
+
+    const pointsToAdd = parseInt(args[1], 10);
+    if(!pointsToAdd)
+      return message.reply("You didn't tell me how many points to give... :(")
+
+    // Ensure there is a points entry for this user.
+    client.points.ensure(`${message.guild.id}-${user.id}`, {
+      user: message.author.id,
+      guild: message.guild.id,
+      points: 0,
+      level: 0
+    });
+
+    // Get their current points.
+    let userPoints = client.points.get(`${message.guild.id}-${user.id}`, "points");
+    userPoints += pointsToAdd;
+
+
+    // And we save it!
+    client.points.set(`${message.guild.id}-${user.id}`, userPoints, "points")
+
+    message.channel.send(`${user.tag} has received ${pointsToAdd} points and now stands at ${userPoints} points.`);
+  }
+
+  if(command === "takeaway") {
+    // Limited to mods- adjust to your own preference!
+    if (!message.member.roles.cache.some(r=>["staff", "admin"].includes(r.name)))
+      return message.reply("you can't use this command.");
+
+    const user = message.mentions.users.first()
+    if(!user) return message.reply("You must mention someone!");
+
+    const pointsToDed = parseInt(args[1], 10);
+    if(!pointsToDed)
+      return message.reply("You didn't tell me how many points to give... :(")
+
+    // Ensure there is a points entry for this user.
+    client.points.ensure(`${message.guild.id}-${user.id}`, {
+      user: message.author.id,
+      guild: message.guild.id,
+      points: 0,
+      level: 0
+    });
+
+    // Get their current points.
+    let userPoints = client.points.get(`${message.guild.id}-${user.id}`, "points");
+    userPoints -= pointsToDed;
+
+    // And we save it!
+    client.points.set(`${message.guild.id}-${user.id}`, userPoints, "points")
+
+    message.channel.send(`${user.tag} has lost ${pointsToDed} points and now stands at ${userPoints} points.`);
+  }
+
+  if(command === "cleanup") {
+    // Let's clean up the database of all "old" users,
+    // and those who haven't been around for... say a month.
+
+    // Get a filtered list (for this guild only).
+    const filtered = client.points.filter( p => p.guild === message.guild.id );
+
+    // We then filter it again (ok we could just do this one, but for clarity's sake...)
+    // So we get only users that haven't been online for a month, or are no longer in the guild.
+    const rightNow = new Date();
+    const toRemove = filtered.filter(data => {
+      return !message.guild.members.has(data.user) || rightNow - 2592000000 > data.lastSeen;
+    });
+
+    toRemove.forEach(data => {
+      client.points.delete(`${message.guild.id}-${data.user}`);
+    });
+
+    message.channel.send(`I've cleaned up ${toRemove.size} old farts.`);
   }
 
   // Grab the command data from the client.commands Enmap

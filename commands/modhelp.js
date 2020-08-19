@@ -20,6 +20,9 @@ ${header}
 **mute**
 **unmute**
 **clear** - make sure you include the command message as a message to be deleted too
+**give** - give a user points
+**takeaway** - remove points from a user
+**cleanup** - remove leaderboard data of users that haven't been active in a month
 
 I believe these commands are pretty self explanatory :)`);
     message.channel.send(embed);
