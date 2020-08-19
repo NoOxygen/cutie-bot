@@ -1,3 +1,3 @@
 exports.run = (client, message) => {
-  message.channel.send(`https://media.discordapp.net/attachments/639101395366051841/639101515256037386/colours.png?width=487&height=375`)
+  message.channel.send(`https://cdn.discordapp.com/attachments/715250117128617988/745580107602591744/flat-design-color-chart.png`)
 }
