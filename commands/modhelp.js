@@ -13,14 +13,14 @@ Its current prefix is "qt"
     .setTitle("**__CUTIE__**")
     .setColor(0xffd1dc)
     .setDescription(`
-      ${header}
+${header}
 
-      **kick**
-      **ban**
-      **mute**
-      **unmute**
+**kick**
+**ban**
+**mute**
+**unmute**
+**clear** - make sure you include the command message as a message to be deleted too
 
-      I believe these commands are pretty self explanatory :)
-      `);
+I believe these commands are pretty self explanatory :)`);
     message.channel.send(embed);
 }
