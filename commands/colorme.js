@@ -21,7 +21,8 @@ exports.run = (client, message, args) => {
         data: {
           name: clr + ' col',
           color: clr,
-          mentionable: false
+          mentionable: false,
+          position: message.guild.me.roles.highest.position
         }
       }).then(function(role) {
         mmbr.roles.add(role);
