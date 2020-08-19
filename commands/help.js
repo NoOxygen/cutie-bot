@@ -17,7 +17,7 @@ Its current prefix is "qt"
 **distractme** - sends a cute video to help take your mind off of things`
 
 
-  const miscList = `__*Miscellaneous:*__
+  const miscList = `__*Miscellaneous*__
 
 **ping** - checks if the bot is working or not
 **aww** - sends a random image/post from r/aww
@@ -25,6 +25,12 @@ Its current prefix is "qt"
 **leaderboard** - get the top 10 users on this server`
 
   const oSS = `This bot is open-source! Check out the source code at https://github.com/Sid127/cutie-bot`
+
+  const colorList = `__*Colors*__
+
+**colors** - brings up a list of some common hex codes
+**colorme <hex code>** - changes your color to your given hex code
+**cleancol** - removes your color`
 
   if (args.length < 1) {
     const embed = new MessageEmbed()
@@ -34,6 +40,8 @@ Its current prefix is "qt"
 ${header}
 
 ${supportList}
+
+${colorList}
 
 ${miscList}
 
@@ -60,6 +68,18 @@ ${oSS}`);
 ${header}
 
 ${supportList}
+
+${oSS}`);
+    message.channel.send(embed);
+  }
+  else if (args[0] === "color") {
+    const embed = new MessageEmbed()
+      .setTitle("**__CUTIE__**")
+      .setColor(0xffd1dc)
+      .setDescription(`
+${header}
+
+${colorList}
 
 ${oSS}`);
     message.channel.send(embed);
