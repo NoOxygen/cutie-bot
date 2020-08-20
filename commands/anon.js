@@ -2,7 +2,7 @@ exports.run = (client, message, [chnl, ...confession]) => {
   if(message.channel.type === 'dm') {
     const { Client, MessageEmbed } = require('discord.js');
     const moment = require("moment-timezone");
-    actionDate = moment(message.createdTimestamp).format('DD/MM/YYYY')
+    actionDate = moment(message.createdTimestamp).format('hh:mm DD/MM/YYYY')
     const paramChnl = parseInt(chnl);
     const anonChannel = client.channels.cache.find(c=>["anon-support", "mental-health-support"].includes(c.name)).id;
     const tee = parseInt(anonChannel)

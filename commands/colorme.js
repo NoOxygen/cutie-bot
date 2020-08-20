@@ -6,7 +6,7 @@ exports.run = (client, message, args) => {
   if (clr === 'random') {
     clr = Math.floor(Math.random() * (0xFFFFFF + 1));
   } else if (isNaN(parseInt(clr, 16))) {
-    throw "Out of range/isNaN\n" + parseInt(clr, 16) + '\n' + clr;
+    message.channel.send("Please check your hex code again. Valid hex codes only have digits 0-9 and alphabets a-f");
   };
 
     if (mmbr.roles.cache.find(a => a.name.endsWith(' col'))) { // change the color of the existing col role
