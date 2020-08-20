@@ -16,7 +16,10 @@ module.exports = (client, message) => {
       username: message.member.user.tag
     });
 
-    client.points.inc(key, "points");
+    if (message.content.length >= 7) {
+      client.points.inc(key, "points");
+    }
+
 
     // Calculate the user's current level
     const curLevel = Math.floor(0.1 * Math.sqrt(client.points.get(key, "points")));
@@ -29,7 +32,7 @@ module.exports = (client, message) => {
     }
     if (client.points.get(key, "level") === 3) {
       const rankRole = message.guild.roles.cache.find(role => role.name === "active")
-      if (!rankRole) return;
+      if (!rankRole) {};
 
       message.member.roles.add(rankRole).catch(console.error)
     }
@@ -67,7 +70,7 @@ module.exports = (client, message) => {
 
   if(command === "give") {
     // Limited to mods- adjust to your own preference!
-    if (!message.member.roles.cache.some(r=>["staff", "admin"].includes(r.name)))
+    if (!message.member.roles.cache.some(r=>["staff", "admin", "aide"].includes(r.name)))
       return message.reply("you can't use this command.");
 
     const user = message.mentions.users.first();
@@ -98,7 +101,7 @@ module.exports = (client, message) => {
 
   if(command === "takeaway") {
     // Limited to mods- adjust to your own preference!
-    if (!message.member.roles.cache.some(r=>["staff", "admin"].includes(r.name)))
+    if (!message.member.roles.cache.some(r=>["staff", "admin", "aide"].includes(r.name)))
       return message.reply("you can't use this command.");
 
     const user = message.mentions.users.first()
