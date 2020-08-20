@@ -1,5 +1,8 @@
 exports.run = async (client, message, args) => {
-  if (!message.member.roles.cache.some(r=>["staff", "aide", "admin"].includes(r.name)))
+  if (!message.member.roles.cache.some(r=>["aide", "staff"].includes(r.name)))
+    return message.reply("you can't use this command.");
+
+  else if(!message.member.hasPermission('ADMINISTRATOR'))
     return message.reply("you can't use this command.");
 
   const amount = args.join(' '); // Amount of messages which should be deleted

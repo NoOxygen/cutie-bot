@@ -16,7 +16,7 @@ module.exports = (client, message) => {
       username: message.member.user.tag
     });
 
-    if (message.content.length >= 7) {
+    if (message.content.length >= 7 && !message.content.startsWith(client.config.prefix)) {
       client.points.inc(key, "points");
     }
 

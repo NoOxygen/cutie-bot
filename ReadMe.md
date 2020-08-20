@@ -1,6 +1,6 @@
 # Cutie - a general purpose Discord bot
 
-This bot was made for specifically ONE server, and has a lot of hardcoded server specific things. Feel free to fork the repo and modify code according to your requirements.
+Feel free to fork the repo and modify code according to your requirements.
 
 # How to host
 

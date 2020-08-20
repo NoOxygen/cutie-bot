@@ -1,8 +1,11 @@
 exports.run = (client, message, [mention, ...reason]) => {
-  const modRole = message.guild.roles.cache.find(role => role.name === "staff");
-  if (!modRole) return;
+  const moment = require("moment-timezone");
+  actionDate = moment().tz('Europe/London').format('DD MMM YYYY hh:mm:ss')
 
-  if (!message.member.roles.cache.has(modRole.id))
+  if(!message.member.hasPermission('ADMINISTRATOR'))
+    return message.reply("you can't use this command.");
+
+  if(!message.member.hasPermission('BAN_MEMBERS'))
     return message.reply("you can't use this command.");
 
   if (message.mentions.members.size === 0)
@@ -15,5 +18,13 @@ exports.run = (client, message, [mention, ...reason]) => {
 
   banMember.ban(reason.join(" ")).then(member => {
     message.reply(`${member.user.username} was succesfully banned.`);
+
+  const logChannel = message.guild.channels.cache.find(channel => channel.name === "mod-log").id;
+  client.channels.cache.get(logChannel).send(`
+**user:** ${mention}
+**action taken:** kick
+**reason for action:** ${reason.join(" ")}
+**date/time and timezone:** ${actionDate} GMT
+**notes:** (in next message)`).catch(console.error);
   });
 };
