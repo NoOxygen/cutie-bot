@@ -30,6 +30,11 @@ module.exports = (client, message) => {
       client.channels.cache.get(botChannel).send(`<@${message.author.id}> leveled up to level **${curLevel}**! :)`);
       client.points.set(key, curLevel, "level");
     }
+    if (client.points.get(key, "level") > curLevel) {
+      const botChannel = message.guild.channels.cache.find(channel => channel.name === "bot").id;
+      client.channels.cache.get(botChannel).send(`<@${message.author.id}> leveled down to level **${curLevel}** :(`);
+      client.points.set(key, curLevel, "level");
+    }
     if (client.points.get(key, "level") === 3) {
       const rankRole = message.guild.roles.cache.find(role => role.name === "active")
       if (!rankRole) {};
@@ -39,7 +44,8 @@ module.exports = (client, message) => {
   }
 
   // Ignore messages not starting with the prefix (in config.json)
-  if (message.content.indexOf(client.config.prefix) !== 0) return;
+  msg = message.content.toLowerCase();
+  if (msg.indexOf(client.config.prefix) !== 0) return;
 
   // Our standard argument/command name definition.
   const args = message.content.slice(client.config.prefix.length).trim().split(/ +/g);
