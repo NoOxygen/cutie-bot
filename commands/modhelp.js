@@ -25,6 +25,7 @@ ${header}
 **takeaway** - remove points from a user
 **cleanup** - remove leaderboard data of users that haven't been active in a month
 **setchannel** - set anon channel
+**ticket-setup** - set ticket channel
 
 I believe these commands are pretty self explanatory :)`);
     message.channel.send(embed);

@@ -1,12 +1,17 @@
 const Discord = require("discord.js");
 const Enmap = require("enmap");
 const fs = require("fs");
-
-const client = new Discord.Client();
+const client = new Discord.Client({partials: ["MESSAGE", "USER", "REACTION"]});
 const config = require("./config.json");
 // We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
 client.config = config;
 client.points = new Enmap({name: "points"});
+client.settings = new Enmap({
+    name: "settings",
+    autoFetch: true,
+    cloneLevel: "deep",
+    fetchAll: true
+});
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);
