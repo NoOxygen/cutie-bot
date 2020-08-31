@@ -20,6 +20,7 @@ exports.run = (client, message, [mention, ...reason]) => {
     message.reply(`${member.user.username} was succesfully kicked.`);
 
   const logChannel = message.guild.channels.cache.find(channel => channel.name === "mod-log").id;
+  if (!logChannel) return;
   client.channels.cache.get(logChannel).send(`
 **user:** ${mention}
 **action taken:** kick
