@@ -3,6 +3,15 @@ const Enmap = require("enmap");
 const fs = require("fs");
 const client = new Discord.Client({partials: ["MESSAGE", "USER", "REACTION"]});
 const config = require("./config.json");
+
+const { play } = require("./include/play");
+const {YOUTUBE_API_KEY} = require("./config.json");
+const ytdl = require("ytdl-core");
+const YouTubeAPI = require("simple-youtube-api");
+const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
+
+client.queue = new Map();
+
 // We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
 client.config = config;
 client.points = new Enmap({name: "points"});
