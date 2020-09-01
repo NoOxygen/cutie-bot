@@ -12,6 +12,7 @@ client.settings = new Enmap({
     cloneLevel: "deep",
     fetchAll: true
 });
+client.confess = new Enmap({name: "confess"})
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);

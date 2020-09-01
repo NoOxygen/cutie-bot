@@ -6,7 +6,7 @@ exports.run = async (client, message, args) => {
     return message.reply("you can't use this command.");
 
   let channel = message.mentions.channels.first();
-  if(!channel) return message.reply("Usage: `!ticket-setup #channel`");
+  if(!channel) return message.reply("Usage: `ticket-setup #channel`");
   let sent = await channel.send(new Discord.MessageEmbed()
     .setTitle("Tickets")
     .setDescription("By reacting to this post, a ticket channel will open for you")

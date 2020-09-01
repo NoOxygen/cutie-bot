@@ -24,7 +24,7 @@ ${header}
 **give** - give a user points
 **takeaway** - remove points from a user
 **cleanup** - remove leaderboard data of users that haven't been active in a month
-**setchannel** - set anon channel
+**anon-setup** - set anon channel
 **ticket-setup** - set ticket channel
 **modclose** - close ticket channel
 
