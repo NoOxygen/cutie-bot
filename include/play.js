@@ -6,6 +6,12 @@ module.exports = {
     const { PRUNING } = require("../config.json");
     const queue = message.client.queue.get(message.guild.id);
 
+    if (!song) {
+      queue.channel.leave();
+      message.client.queue.delete(message.guild.id);
+      return queue.textChannel.send("Music queue ended... I left to save resources. Play a song and I'll be back for you <3").catch(console.error);
+    }
+
     let stream = null;
     let streamType = song.url.includes("youtube.com") ? "opus" : "ogg/opus";
 

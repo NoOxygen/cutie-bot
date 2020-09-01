@@ -37,7 +37,7 @@ Its current prefix is "qt"
   **play** - plays a song/playlist by name/url
   **pause**
   **resume** - the _play_ command does NOT resume
-  **playlist** - plays a plylist from url
+  **playlist** - plays a playlist from url
   **np** - shows info on current track
   **lyrics** - attempts to find lyrics for the song
   **loop** - toggle queue loop
@@ -48,7 +48,7 @@ Its current prefix is "qt"
   **skip**
   **skipto** - same as skip, but can jump to another position in queue
   **stop** - stops all music and clears queue
-  **leave** - disconnect bot, bot does NOT auto-disconnect`
+  **leave** - disconnect bot`
 
   if (args.length < 1) {
     const embed = new MessageEmbed()
