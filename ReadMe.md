@@ -31,3 +31,11 @@ npm install
 ```
 node index.js
 ```
+
+# Current feature List
+- Specific commands to help in mental health support servers
+- Basic moderation (kick, ban, mute, clear)
+- Color management
+- Anonymous messages/confessions
+- Point based Leaderboard
+- Auto unverified role on member join
