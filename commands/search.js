@@ -5,11 +5,11 @@ exports.run = async (client, message, args) => {
   const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
 
   if (!args.length)
-    return message.reply(`Usage: ${message.client.prefix}${module.exports.name} <Video Name>`).catch(console.error);
+    return message.send(`Usage: ${message.client.prefix}${module.exports.name} <Video Name>`).catch(console.error);
   if (message.channel.activeCollector)
-    return message.reply("A message collector is already active in this channel.");
+    return message.send("A message collector is already active in this channel.");
   if (!message.member.voice.channel)
-    return message.reply("You need to join a voice channel first!").catch(console.error);
+    return message.send("You need to join a voice channel first!").catch(console.error);
 
   const search = args.join(" ");
 

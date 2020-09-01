@@ -1,7 +1,7 @@
 exports.run = (client, message) => {
   const { MessageEmbed, splitMessage, escapeMarkdown } = require("discord.js");
   const queue = message.client.queue.get(message.guild.id);
-  if (!queue) return message.reply("There is nothing playing.").catch(console.error);
+  if (!queue) return message.send("There is nothing playing.").catch(console.error);
 
   const description = queue.songs.map((song, index) => `${index + 1}. ${escapeMarkdown(song.title)}`);
 

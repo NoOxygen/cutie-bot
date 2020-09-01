@@ -7,21 +7,21 @@ exports.run = async (client, message, args) => {
   const YouTubeAPI = require("simple-youtube-api");
   const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
   const serverQueue = message.client.queue.get(message.guild.id);
-  
+
   if (serverQueue && channel !== message.guild.me.voice.channel)
-    return message.reply(`You must be in the same channel as ${message.client.user}`).catch(console.error);
+    return message.send(`You must be in the same channel as ${message.client.user}`).catch(console.error);
 
   if (!args.length)
     return message
-      .reply(`Usage: ${message.client.prefix}playlist <YouTube Playlist URL | Playlist Name>`)
+      .send(`Give me a playlist link. Not... this!`)
       .catch(console.error);
-  if (!channel) return message.reply("You need to join a voice channel first!").catch(console.error);
+  if (!channel) return message.send("You need to join a voice channel first!").catch(console.error);
 
   const permissions = channel.permissionsFor(message.client.user);
   if (!permissions.has("CONNECT"))
-    return message.reply("Cannot connect to voice channel, missing permissions");
+    return message.send("Cannot connect to voice channel, missing permissions");
   if (!permissions.has("SPEAK"))
-    return message.reply("I cannot speak in this voice channel, make sure I have the proper permissions!");
+    return message.send("I cannot speak in this voice channel, make sure I have the proper permissions!");
 
   const search = args.join(" ");
   const pattern = /^.*(youtu.be\/|list=)([^#\&\?]*).*/gi;
@@ -48,7 +48,7 @@ exports.run = async (client, message, args) => {
       videos = await playlist.getVideos(MAX_PLAYLIST_SIZE || 10, { part: "snippet" });
     } catch (error) {
       console.error(error);
-      return message.reply("Playlist not found :(").catch(console.error);
+      return message.send("Playlist not found :(").catch(console.error);
     }
   } else {
     try {
@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
       videos = await playlist.getVideos(MAX_PLAYLIST_SIZE || 10, { part: "snippet" });
     } catch (error) {
       console.error(error);
-      return message.reply("Playlist not found :(").catch(console.error);
+      return message.send("Playlist not found :(").catch(console.error);
     }
   }
 
@@ -72,7 +72,7 @@ exports.run = async (client, message, args) => {
       serverQueue.songs.push(song);
       if (!PRUNING)
         message.channel
-          .send(`✅ **${song.title}** has been added to the queue by ${message.author}`)
+          .send(`✅ **${song.title}** has been added to the queue by ${message.author.username}`)
           .catch(console.error);
     } else {
       queueConstruct.songs.push(song);
@@ -92,7 +92,7 @@ exports.run = async (client, message, args) => {
         playlistEmbed.description.substr(0, 2007) + "\nPlaylist larger than character limit...";
   }
 
-  message.channel.send(`${message.author} Started a playlist`, playlistEmbed);
+  message.channel.send(`${message.author.username} started a playlist`, playlistEmbed);
 
   if (!serverQueue) message.client.queue.set(message.guild.id, queueConstruct);
 

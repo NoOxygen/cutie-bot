@@ -2,13 +2,13 @@ exports.run = (client, message, args) => {
   const { canModifyQueue } = require("../util/CutieUtil");
 
   if (!args.length)
-    return message
-      .reply(`Usage: ${message.client.prefix}${module.exports.name} <Queue Number>`)
+    return messagesend
+      .send(`Skip to whaaattt`)
       .catch(console.error);
 
   if (isNaN(args[0]))
     return message
-      .reply(`Usage: ${message.client.prefix}${module.exports.name} <Queue Number>`)
+      .send(`Skip to whaaattt`)
       .catch(console.error);
 
   const queue = message.client.queue.get(message.guild.id);
@@ -16,7 +16,7 @@ exports.run = (client, message, args) => {
   if (!canModifyQueue(message.member)) return;
 
   if (args[0] > queue.songs.length)
-    return message.reply(`The queue is only ${queue.songs.length} songs long!`).catch(console.error);
+    return message.send(`The queue is only ${queue.songs.length} songs long!`).catch(console.error);
 
   queue.playing = true;
   if (queue.loop) {
@@ -27,5 +27,5 @@ exports.run = (client, message, args) => {
     queue.songs = queue.songs.slice(args[0] - 2);
   }
   queue.connection.dispatcher.end();
-  queue.textChannel.send(`${message.author} ⏭ skipped ${args[0] - 1} songs`).catch(console.error);
+  queue.textChannel.send(`${message.author.username} skipped ${args[0] - 1} songs`).catch(console.error);
 }

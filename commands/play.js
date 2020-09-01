@@ -7,20 +7,20 @@ exports.run = async (client, message, args) => {
   const { channel } = message.member.voice;
 
   const serverQueue = message.client.queue.get(message.guild.id);
-  if (!channel) return message.reply("You need to join a voice channel first!").catch(console.error);
+  if (!channel) return message.send("You need to join a voice channel first!").catch(console.error);
   if (serverQueue && channel !== message.guild.me.voice.channel)
-    return message.reply(`You must be in the same channel as ${message.client.user}`).catch(console.error);
+    return message.send(`You must be in the same channel as ${message.client.user}`).catch(console.error);
 
   if (!args.length)
     return message
-      .reply(`Usage: ${message.client.prefix}play <YouTube URL | Video Name | Soundcloud URL>`)
+      .send(`You didn't tell me what to play`)
       .catch(console.error);
 
   const permissions = channel.permissionsFor(message.client.user);
   if (!permissions.has("CONNECT"))
-    return message.reply("Cannot connect to voice channel, missing permissions");
+    return message.send("Cannot connect to voice channel, missing permissions");
   if (!permissions.has("SPEAK"))
-    return message.reply("I cannot speak in this voice channel, make sure I have the proper permissions!");
+    return message.send("I cannot speak in this voice channel, make sure I have the proper permissions!");
 
   const search = args.join(" ");
   const videoPattern = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi;
@@ -69,14 +69,14 @@ exports.run = async (client, message, args) => {
       };
     } catch (error) {
       console.error(error);
-      return message.reply("No video was found with a matching title").catch(console.error);
+      return message.send("No video was found with a matching title").catch(console.error);
     }
   }
 
   if (serverQueue) {
     serverQueue.songs.push(song);
     return serverQueue.textChannel
-      .send(`✅ **${song.title}** has been added to the queue by ${message.author}`)
+      .send(`✅ **${song.title}** has been added to the queue by ${message.author.username}`)
       .catch(console.error);
   }
 
