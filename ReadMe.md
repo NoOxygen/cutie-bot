@@ -16,7 +16,10 @@ for Linux - https://github.com/nodesource/distributions/blob/master/README.md
 ```
 {
     "token": "<yourToken>",
-    "prefix": "<yourPrefix>"
+    "prefix": "<yourPrefix>",
+    "YOUTUBE_API_KEY": "<your YouTube key>",
+    "MAX_PLAYLIST_SIZE": 10,
+    "PRUNING": false
 }
 ```
 

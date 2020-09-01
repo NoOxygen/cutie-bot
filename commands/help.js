@@ -32,12 +32,32 @@ Its current prefix is "qt"
 **colorme <hex code>** - changes your color to your given hex code
 **cleancol** - removes your color`
 
+  const music = `__*Music*__
+
+  **play** - plays a song/playlist by name/url
+  **pause**
+  **resume** - the _play_ command does NOT resume
+  **playlist** - plays a plylist from url
+  **np** - shows info on current track
+  **lyrics** - attempts to find lyrics for the song
+  **loop** - toggle queue loop
+  **queue** - get queue
+  **remove** - remove a song from the queue
+  **search**
+  **shuffle**
+  **skip**
+  **skipto** - same as skip, but can jump to another position in queue
+  **stop** - stops all music and clears queue
+  **leave** - disconnect bot, bot does NOT auto-disconnect`
+
   if (args.length < 1) {
     const embed = new MessageEmbed()
       .setTitle("**__CUTIE__**")
       .setColor(0xffd1dc)
       .setDescription(`
 ${header}
+
+${music}
 
 ${supportList}
 
@@ -80,6 +100,18 @@ ${oSS}`);
 ${header}
 
 ${colorList}
+
+${oSS}`);
+    message.channel.send(embed);
+  }
+  else if (args[0] === "music") {
+    const embed = new MessageEmbed()
+      .setTitle("**__CUTIE__**")
+      .setColor(0xffd1dc)
+      .setDescription(`
+${header}
+
+${music}
 
 ${oSS}`);
     message.channel.send(embed);
