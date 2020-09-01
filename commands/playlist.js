@@ -9,19 +9,19 @@ exports.run = async (client, message, args) => {
   const serverQueue = message.client.queue.get(message.guild.id);
 
   if (serverQueue && channel !== message.guild.me.voice.channel)
-    return message.send(`You must be in the same channel as ${message.client.user}`).catch(console.error);
+    return message.channel.send(`You must be in the same channel as ${message.client.user}`).catch(console.error);
 
   if (!args.length)
     return message
       .send(`Give me a playlist link. Not... this!`)
       .catch(console.error);
-  if (!channel) return message.send("You need to join a voice channel first!").catch(console.error);
+  if (!channel) return message.channel.send("You need to join a voice channel first!").catch(console.error);
 
   const permissions = channel.permissionsFor(message.client.user);
   if (!permissions.has("CONNECT"))
-    return message.send("Cannot connect to voice channel, missing permissions");
+    return message.channel.send("Cannot connect to voice channel, missing permissions");
   if (!permissions.has("SPEAK"))
-    return message.send("I cannot speak in this voice channel, make sure I have the proper permissions!");
+    return message.channel.send("I cannot speak in this voice channel, make sure I have the proper permissions!");
 
   const search = args.join(" ");
   const pattern = /^.*(youtu.be\/|list=)([^#\&\?]*).*/gi;
@@ -48,7 +48,7 @@ exports.run = async (client, message, args) => {
       videos = await playlist.getVideos(MAX_PLAYLIST_SIZE || 10, { part: "snippet" });
     } catch (error) {
       console.error(error);
-      return message.send("Playlist not found :(").catch(console.error);
+      return message.channel.send("Playlist not found :(").catch(console.error);
     }
   } else {
     try {
@@ -57,7 +57,7 @@ exports.run = async (client, message, args) => {
       videos = await playlist.getVideos(MAX_PLAYLIST_SIZE || 10, { part: "snippet" });
     } catch (error) {
       console.error(error);
-      return message.send("Playlist not found :(").catch(console.error);
+      return message.channel.send("Playlist not found :(").catch(console.error);
     }
   }
 

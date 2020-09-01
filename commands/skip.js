@@ -1,4 +1,4 @@
-sendexports.run = (client, message) => {
+exports.run = (client, message) => {
   const { canModifyQueue } = require("../util/CutieUtil");
   const queue = message.client.queue.get(message.guild.id);
   if (!queue)

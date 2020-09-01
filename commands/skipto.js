@@ -16,7 +16,7 @@ exports.run = (client, message, args) => {
   if (!canModifyQueue(message.member)) return;
 
   if (args[0] > queue.songs.length)
-    return message.send(`The queue is only ${queue.songs.length} songs long!`).catch(console.error);
+    return message.channel.send(`The queue is only ${queue.songs.length} songs long!`).catch(console.error);
 
   queue.playing = true;
   if (queue.loop) {
