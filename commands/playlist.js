@@ -82,7 +82,7 @@ exports.run = async (client, message, args) => {
   let playlistEmbed = new MessageEmbed()
     .setTitle(`${playlist.title}`)
     .setURL(playlist.url)
-    .setColor("#F8AA2A")
+    .setColor("0xffd1dc")
     .setTimestamp();
 
   if (!PRUNING) {

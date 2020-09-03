@@ -10,7 +10,7 @@ exports.run = (client, message) => {
   let nowPlaying = new MessageEmbed()
     .setTitle("Now playing")
     .setDescription(`${song.title}\n${song.url}`)
-    .setColor("#F8AA2A")
+    .setColor("0xffd1dc")
     .setAuthor("Cutie")
     .addField("\u200b", new Date(seek * 1000).toISOString().substr(11, 8) + "[" + createBar((song.duration == 0 ? seek : song.duration), seek, 20)[0] + "]" + (song.duration == 0 ? " ◉ LIVE" : new Date(song.duration * 1000).toISOString().substr(11, 8)), false);
 

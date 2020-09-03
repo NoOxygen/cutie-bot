@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     .setTitle("Leaderboard")
     .setAuthor(client.user.username, client.user.avatarURL)
     .setDescription("Our top 10 points leaders!")
-    .setColor(0x00AE86);
+    .setColor(0xffd1dc);
   for(const data of top10) {
     embed.addField(`${data.username}`, `${data.points} points (level ${data.level})`);
   }
@@ -46,7 +46,7 @@ exports.run = async (client, message, args) => {
           .setTitle("Leaderboard")
           .setAuthor(client.user.username, client.user.avatarURL)
           .setDescription("More places")
-          .setColor(0x00AE86);
+          .setColor(0xffd1dc);
         for(const data of top10) {
           embed.addField(`${data.username}`, `${data.points} points (level ${data.level})`);}
         leaderboard.edit(nextEmbed);
@@ -61,7 +61,7 @@ exports.run = async (client, message, args) => {
           .setTitle("Leaderboard")
           .setAuthor(client.user.username, client.user.avatarURL)
           .setDescription("More places")
-          .setColor(0x00AE86);
+          .setColor(0xffd1dc);
         for(const data of top10) {
           embed.addField(`${data.username}`, `${data.points} points (level ${data.level})`);}
         leaderboard.edit(prevEmbed);

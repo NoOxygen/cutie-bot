@@ -8,7 +8,7 @@ exports.run = (client, message) => {
   let queueEmbed = new MessageEmbed()
     .setTitle("Cutie Music Queue")
     .setDescription(description)
-    .setColor("#F8AA2A");
+    .setColor("0xffd1dc");
 
   const splitDescription = splitMessage(description, {
     maxLength: 2048,
