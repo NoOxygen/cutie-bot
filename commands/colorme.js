@@ -5,8 +5,10 @@ exports.run = (client, message, args) => {
   let clr = message.content.split(" ").pop(); if (clr.startsWith('#')) clr = clr.substr(1);
   if (clr === 'random') {
     clr = Math.floor(Math.random() * (0xFFFFFF + 1));
+  } else if (clr === 'impressed') {
+    clr = Math.floor(Math.random() * (0xFFFFFF + 1));
   } else if (isNaN(parseInt(clr, 16)))
-      return message.channel.send("Please check your hex code again. Valid hex codes only have digits 0-9 and alphabets a-f");
+      return message.channel.send("Please check your hex code again. Valid hex codes only have digits 0-9 and alphabets a-f").catch(console.error);
 
     if (mmbr.roles.cache.find(a => a.name.endsWith(' col'))) { // change the color of the existing col role
         mmbr.roles.cache.find(a => a.name.endsWith(' col')).edit({
