@@ -44,22 +44,22 @@ exports.run = async (client, message, args) => {
       i = i + 10
       j = j + 10
       var topNext = newsorted.splice(i, j);
-      console.log(topNext);
       const nextEmbed = new MessageEmbed()
         .setTitle("Leaderboard")
         .setAuthor(client.user.username, client.user.avatarURL)
         .setDescription("More places")
         .setColor(0xffd1dc);
       for(const data of topNext) {
-        embed.addField(`${data.username}`, `${data.points} points (level ${data.level})`);}
+        nextEmbed.addField(`${data.username}`, `${data.points} points (level ${data.level})`);}
       await leaderboard.edit(nextEmbed);
-    } else if (reaction.emoji.name === "⬅️"){
+    }
+    if (reaction.emoji.name === "⬅️"){
       var oldfiltered = client.points.filter( p => p.guild === message.guild.id ).array();
       var oldsorted = oldfiltered.sort((a, b) => b.points - a.points);
       reaction.users.remove(user).catch(console.error);
+      if (i === 0) return;
       i = i - 10
       j = j - 10
-      if (i < 0) return;
       var topPrev = oldsorted.splice(i, j);
       const prevEmbed = new MessageEmbed()
         .setTitle("Leaderboard")
@@ -67,7 +67,7 @@ exports.run = async (client, message, args) => {
         .setDescription("More places")
         .setColor(0xffd1dc);
       for(const data of topPrev) {
-        embed.addField(`${data.username}`, `${data.points} points (level ${data.level})`);}
+        prevEmbed.addField(`${data.username}`, `${data.points} points (level ${data.level})`);}
       await leaderboard.edit(prevEmbed);
     }
   });
