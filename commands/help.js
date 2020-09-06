@@ -22,7 +22,8 @@ Its current prefix is "qt"
 **ping** - checks if the bot is working or not
 **aww** - sends a random image/post from r/aww
 **points** - check your points on this server
-**leaderboard** - get the top 10 users on this server`
+**leaderboard** - get the top 10 users on this server
+**levels** - get the full leaderboard as a one-time link`
 
   const oSS = `This bot is open-source! Check out the source code at https://github.com/Sid127/cutie-bot`
 
