@@ -10,11 +10,11 @@ exports.run = (client, message, [srvr, ...confession]) => {
       .setFooter(`${actionDate}`)
 
 
-    const sendSrvr = client.confess.get(srvr, "guild").catch(console.error);
-    const sendChnl = client.confess.get(srvr, "anonChnl").catch(console.error);
+    const sendSrvr = client.confess.get(srvr, "guild")
+    const sendChnl = client.confess.get(srvr, "anonChnl")
 
     if (srvr === sendSrvr){
-      client.channels.cache.get(sendChnl).send(embed)
+      client.channels.cache.get(sendChnl).send(embed).catch(console.error);
     }
   }
 }
