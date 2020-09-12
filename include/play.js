@@ -1,15 +1,16 @@
 const ytdlDiscord = require("ytdl-core-discord");
+const scdl = require("soundcloud-downloader");
 const { canModifyQueue } = require("../util/CutieUtil");
 
 module.exports = {
   async play(song, message) {
-    const { PRUNING } = require("../config.json");
+    const { PRUNING, SOUNDCLOUD_CLIENT_ID } = require("../config.json");
     const queue = message.client.queue.get(message.guild.id);
 
     if (!song) {
       queue.channel.leave();
       message.client.queue.delete(message.guild.id);
-      return queue.textChannel.send("Music queue ended... I left to save resources. Play a song and I'll be back for you <3").catch(console.error);
+      return queue.textChannel.send("Music queue ended.").catch(console.error);
     }
 
     let stream = null;
@@ -18,6 +19,21 @@ module.exports = {
     try {
       if (song.url.includes("youtube.com")) {
         stream = await ytdlDiscord(song.url, { highWaterMark: 1 << 25 });
+      } else if (song.url.includes("soundcloud.com")) {
+        try {
+          stream = await scdl.downloadFormat(
+            song.url,
+            scdl.FORMATS.OPUS,
+            SOUNDCLOUD_CLIENT_ID ? SOUNDCLOUD_CLIENT_ID : undefined
+          );
+        } catch (error) {
+          stream = await scdl.downloadFormat(
+            song.url,
+            scdl.FORMATS.MP3,
+            SOUNDCLOUD_CLIENT_ID ? SOUNDCLOUD_CLIENT_ID : undefined
+          );
+          streamType = "unknown";
+        }
       }
     } catch (error) {
       if (queue) {

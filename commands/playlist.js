@@ -3,9 +3,10 @@ exports.run = async (client, message, args) => {
   const { channel } = message.member.voice;
   const { MessageEmbed } = require("discord.js");
   const { play } = require("../include/play");
-  const { YOUTUBE_API_KEY, MAX_PLAYLIST_SIZE } = require("../config.json");
+  const { YOUTUBE_API_KEY, MAX_PLAYLIST_SIZE, SOUNDCLOUD_CLIENT_ID } = require("../config.json");
   const YouTubeAPI = require("simple-youtube-api");
   const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
+  const scdl = require("soundcloud-downloader")
   const serverQueue = message.client.queue.get(message.guild.id);
 
   if (serverQueue && channel !== message.guild.me.voice.channel)
@@ -50,6 +51,16 @@ exports.run = async (client, message, args) => {
       console.error(error);
       return message.channel.send("Playlist not found :(").catch(console.error);
     }
+  } else if (scdl.isValidUrl(args[0])) {
+    if (args[0].includes('/sets/')) {
+      message.channel.send('⌛ fetching the playlist...')
+      playlist = await scdl.getSetInfo(args[0], SOUNDCLOUD_CLIENT_ID)
+      videos = playlist.tracks.map(track => ({
+        title: track.title,
+        url: track.permalink_url,
+        duration: track.duration / 1000
+      }))
+    }  
   } else {
     try {
       const results = await youtube.searchPlaylists(search, 1, { part: "snippet" });
