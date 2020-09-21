@@ -5,7 +5,7 @@ exports.run = (client, message, [mention, ...reason]) => {
     return message.reply("you can't use this command.");
 
   if (message.mentions.members.size === 0)
-    return message.reply("please mention a user to ban");
+    return message.reply("please mention a user to mute");
 
   const muteMember = message.mentions.members.first();
 
