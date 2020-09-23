@@ -18,4 +18,5 @@ exports.run = (client, message) => {
 Closed by: <@${closer.name}>
 Verified by: <@${message.author.id}>`)
   client.channels.cache.get(logChannel).send(embed);
+  closer.name='';
 }
