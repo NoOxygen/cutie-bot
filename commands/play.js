@@ -62,8 +62,6 @@ exports.run = async (client, message, args) => {
       console.error(error);
       return message.reply(error.message).catch(console.error);
     }
-    console.error(error);
-    return message.reply(error.message).catch(console.error);
   } else if (scRegex.test(url)) {
     // It is a valid Soundcloud URL
     if (!SOUNDCLOUD_CLIENT_ID)
