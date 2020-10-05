@@ -1,16 +1,16 @@
 exports.run = (client, message, args) => {
   const { canModifyQueue } = require("../util/CutieUtil");
-	const { Client, MessageEmbed } = require('discord.js');
+  const { Client, MessageEmbed } = require('discord.js');
 
-	const errorEmbed = new MessageEmbed()
-		.setColor(0xffd1dc)
-		.setDescription(`Skip to whaaattt`)
-	const whereQ = new MessageEmbed()
-		.setColor(0xffd1dc)
-		.setDescription(`There is no queue`)
-	const tooFarEmbed = new MessageEmbed()
-		.setColor(0xffd1dc)
-		.setDescription(`The queue is only ${queue.songs.length} songs long!`)
+  const errorEmbed = new MessageEmbed()
+    .setColor(0xffd1dc)
+    .setDescription(`Skip to whaaattt`)
+  const whereQ = new MessageEmbed()
+    .setColor(0xffd1dc)
+    .setDescription(`There is no queue`)
+  const tooFarEmbed = new MessageEmbed()
+    .setColor(0xffd1dc)
+    .setDescription(`The queue is only ${queue.songs.length} songs long!`)
 
   if (!args.length)
     return messagesend
@@ -38,8 +38,8 @@ exports.run = (client, message, args) => {
     queue.songs = queue.songs.slice(args[0] - 2);
   }
   queue.connection.dispatcher.end();
-	const skipEmbed = new MessageEmbed()
-		.setColor(0xffd1dc)
-		.setDescription(`${message.author.username} skipped ${args[0] - 1} songs`)
+  const skipEmbed = new MessageEmbed()
+    .setColor(0xffd1dc)
+    .setDescription(`${message.author.username} skipped ${args[0] - 1} songs`)
   queue.textChannel.send(skipEmbed).catch(console.error);
 }

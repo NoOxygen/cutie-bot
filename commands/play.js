@@ -1,6 +1,6 @@
 exports.run = async (client, message, args) => {
   const { play } = require("../include/play");
-	const { MessageEmbed } = require("discord.js");
+  const { MessageEmbed } = require("discord.js");
   const { YOUTUBE_API_KEY, SOUNDCLOUD_CLIENT_ID } = require("../config.json");
   const ytdl = require("ytdl-core");
   const YouTubeAPI = require("simple-youtube-api");
@@ -14,23 +14,23 @@ exports.run = async (client, message, args) => {
     return message.channel.send(`You must be in the same channel as ${message.client.user}`).catch(console.error);
 
   if (!args.length)
-		const errorEmbed = new MessageEmbed()
-			.setColor(0xffd1dc)
-			.setDescription(`You didn't tell me what to play`)
+    const errorEmbed = new MessageEmbed()
+      .setColor(0xffd1dc)
+      .setDescription(`You didn't tell me what to play`)
     return message
       .send(errorEmbed)
       .catch(console.error);
 
   const permissions = channel.permissionsFor(message.client.user);
   if (!permissions.has("CONNECT"))
-		const errorEmbed = new MessageEmbed()
-			.setColor(0xffd1dc)
-			.setDescription("Cannot connect to voice channel, missing permissions")
+    const errorEmbed = new MessageEmbed()
+      .setColor(0xffd1dc)
+      .setDescription("Cannot connect to voice channel, missing permissions")
     return message.channel.send(errorEmbed);
   if (!permissions.has("SPEAK"))
-		const errorEmbed = new MessageEmbed()
-			.setColor(0xffd1dc)
-			.setDescription("I cannot speak in this voice channel, make sure I have the proper permissions!")
+    const errorEmbed = new MessageEmbed()
+      .setColor(0xffd1dc)
+      .setDescription("I cannot speak in this voice channel, make sure I have the proper permissions!")
     return message.channel.send(errorEmbed);
 
   const search = args.join(" ");
@@ -75,9 +75,9 @@ exports.run = async (client, message, args) => {
   } else if (scRegex.test(url)) {
     // It is a valid Soundcloud URL
     if (!SOUNDCLOUD_CLIENT_ID)
-			const errorEmbed = new MessageEmbed()
-				.setColor(0xffd1dc)
-				.setDescription("Missing Soundcloud Client ID in config")
+      const errorEmbed = new MessageEmbed()
+        .setColor(0xffd1dc)
+        .setDescription("Missing Soundcloud Client ID in config")
       return message.channel.send(errorEmbed).catch(console.error);
     try {
       const trackInfo = await scdl.getInfo(url, SOUNDCLOUD_CLIENT_ID);
@@ -87,13 +87,13 @@ exports.run = async (client, message, args) => {
       };
     } catch (error) {
     if (error.statusCode === 404)
-			const errorEmbed = new MessageEmbed()
-				.setColor(0xffd1dc)
-				.setDescription("Couldn't find that Soundcloud track")
+      const errorEmbed = new MessageEmbed()
+        .setColor(0xffd1dc)
+        .setDescription("Couldn't find that Soundcloud track")
       return message.channel.send(errorEmbed).catch(console.error);
-			const errorEmbed = new MessageEmbed()
-				.setColor(0xffd1dc)
-				.setDescription("There was an error playing that Soundcloud track.")
+      const errorEmbed = new MessageEmbed()
+        .setColor(0xffd1dc)
+        .setDescription("There was an error playing that Soundcloud track.")
     return message.channel.send(errorEmbed).catch(console.error);
   }
   } else {
@@ -107,18 +107,18 @@ exports.run = async (client, message, args) => {
       };
     } catch (error) {
       console.error(error);
-			const errorEmbed = new MessageEmbed()
-				.setColor(0xffd1dc)
-				.setDescription("No video was found with a matching title")
+      const errorEmbed = new MessageEmbed()
+        .setColor(0xffd1dc)
+        .setDescription("No video was found with a matching title")
       return message.channel.send(errorEmbed).catch(console.error);
     }
   }
 
   if (serverQueue) {
     serverQueue.songs.push(song);
-		const addEmbed = new MessageEmbed()
-			.setColor(0xffd1dc)
-			.setDescription(`✅ **${song.title}** has been added to the queue by ${message.author.username}`)
+    const addEmbed = new MessageEmbed()
+      .setColor(0xffd1dc)
+      .setDescription(`✅ **${song.title}** has been added to the queue by ${message.author.username}`)
     return serverQueue.textChannel
       .send(addEmbed)
       .catch(console.error);
@@ -135,9 +135,9 @@ exports.run = async (client, message, args) => {
     console.error(error);
     message.client.queue.delete(message.guild.id);
     await channel.leave();
-		const errorEmbed = new MessageEmbed()
-			.setColor(0xffd1dc)
-			.setDescription(`Could not join the channel: ${error}`)
+    const errorEmbed = new MessageEmbed()
+      .setColor(0xffd1dc)
+      .setDescription(`Could not join the channel: ${error}`)
     return message.channel.send(errorEmbed).catch(console.error);
   }
 }

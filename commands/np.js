@@ -3,9 +3,9 @@ exports.run = (client, message) => {
   const { MessageEmbed } = require("discord.js");
   const queue = message.client.queue.get(message.guild.id);
 
-	const errorEmbed = new MessageEmbed()
-		.setColor(0xffd1dc)
-		.setDescription("There is nothing playing")
+  const errorEmbed = new MessageEmbed()
+    .setColor(0xffd1dc)
+    .setDescription("There is nothing playing")
 
   if (!queue) return message.reply(errorEmbed).catch(console.error);
   const song = queue.songs[0];

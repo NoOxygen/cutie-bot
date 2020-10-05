@@ -1,14 +1,14 @@
 exports.run = (client, message, args) => {
   const { canModifyQueue } = require("../util/CutieUtil");
-	const { Client, MessageEmbed } = require('discord.js');
+  const { Client, MessageEmbed } = require('discord.js');
 
-	const whereQ = new MessageEmbed()
-		.setColor(0xffd1dc)
-		.setDescription(`There is no queue`)
+  const whereQ = new MessageEmbed()
+    .setColor(0xffd1dc)
+    .setDescription(`There is no queue`)
 
-	const boof = new MessageEmbed()
-		.setColor(0xffd1dc)
-		.setDescription(`${message.author.username} removed **${song[0].title}** from the queue.`)
+  const boof = new MessageEmbed()
+    .setColor(0xffd1dc)
+    .setDescription(`${message.author.username} removed **${song[0].title}** from the queue.`)
 
   const queue = message.client.queue.get(message.guild.id);
   if (!queue) return message.channel.send(whereQ).catch(console.error);

@@ -1,5 +1,5 @@
 exports.run = (client, message) => {
-	const { Client, MessageEmbed } = require('discord.js');
+  const { Client, MessageEmbed } = require('discord.js');
   const { canModifyQueue } = require("../util/CutieUtil");
 
   const queue = message.client.queue.get(message.guild.id);
@@ -9,8 +9,8 @@ exports.run = (client, message) => {
 
   queue.songs = [];
   queue.connection.dispatcher.end();
-	const stopEmbed = new MessageEmbed()
-		.setColor(0xffd1dc)
-		.setDescription(`${user.username} stopped the music!`)
+  const stopEmbed = new MessageEmbed()
+    .setColor(0xffd1dc)
+    .setDescription(`${user.username} stopped the music!`)
   queue.textChannel.send(stopEmbed).catch(console.error);
 }
