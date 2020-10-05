@@ -13,25 +13,29 @@ exports.run = async (client, message, args) => {
   if (serverQueue && channel !== message.guild.me.voice.channel)
     return message.channel.send(`You must be in the same channel as ${message.client.user}`).catch(console.error);
 
-  if (!args.length)
-    const errorEmbed = new MessageEmbed()
+  if (!args.length) {
+    let errorEmbed = new MessageEmbed()
       .setColor(0xffd1dc)
       .setDescription(`You didn't tell me what to play`)
     return message
       .send(errorEmbed)
       .catch(console.error);
+  }
 
   const permissions = channel.permissionsFor(message.client.user);
-  if (!permissions.has("CONNECT"))
+  if (!permissions.has("CONNECT")) {
     const errorEmbed = new MessageEmbed()
       .setColor(0xffd1dc)
       .setDescription("Cannot connect to voice channel, missing permissions")
     return message.channel.send(errorEmbed);
-  if (!permissions.has("SPEAK"))
+  }
+
+  if (!permissions.has("SPEAK")) {
     const errorEmbed = new MessageEmbed()
       .setColor(0xffd1dc)
       .setDescription("I cannot speak in this voice channel, make sure I have the proper permissions!")
     return message.channel.send(errorEmbed);
+  }
 
   const search = args.join(" ");
   const videoPattern = /^(https?:\/\/)?(www\.)?(m\.)?(youtube\.com|youtu\.?be)\/.+$/gi;
@@ -74,11 +78,13 @@ exports.run = async (client, message, args) => {
     }
   } else if (scRegex.test(url)) {
     // It is a valid Soundcloud URL
-    if (!SOUNDCLOUD_CLIENT_ID)
+    if (!SOUNDCLOUD_CLIENT_ID){
       const errorEmbed = new MessageEmbed()
         .setColor(0xffd1dc)
         .setDescription("Missing Soundcloud Client ID in config")
       return message.channel.send(errorEmbed).catch(console.error);
+    }
+
     try {
       const trackInfo = await scdl.getInfo(url, SOUNDCLOUD_CLIENT_ID);
       song = {
@@ -86,15 +92,16 @@ exports.run = async (client, message, args) => {
         url: url
       };
     } catch (error) {
-    if (error.statusCode === 404)
+    if (error.statusCode === 404){
       const errorEmbed = new MessageEmbed()
         .setColor(0xffd1dc)
         .setDescription("Couldn't find that Soundcloud track")
       return message.channel.send(errorEmbed).catch(console.error);
-      const errorEmbed = new MessageEmbed()
-        .setColor(0xffd1dc)
-        .setDescription("There was an error playing that Soundcloud track.")
-    return message.channel.send(errorEmbed).catch(console.error);
+    }
+    const errorEmbed = new MessageEmbed()
+      .setColor(0xffd1dc)
+      .setDescription("There was an error playing that Soundcloud track.")
+  return message.channel.send(errorEmbed).catch(console.error);
   }
   } else {
       try {
