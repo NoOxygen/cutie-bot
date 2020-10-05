@@ -1,6 +1,7 @@
 const ytdlDiscord = require("ytdl-core-discord");
 const scdl = require("soundcloud-downloader");
 const { canModifyQueue } = require("../util/CutieUtil");
+const { Client, MessageEmbed } = require('discord.js');
 
 module.exports = {
   async play(song, message) {
@@ -10,7 +11,10 @@ module.exports = {
     if (!song) {
       queue.channel.leave();
       message.client.queue.delete(message.guild.id);
-      return queue.textChannel.send("Music queue ended.").catch(console.error);
+			const endEmbed = new MessageEmbed()
+				.setColor(0xffd1dc)
+				.setDescription("Music queue ended.")
+      return queue.textChannel.send(endEmbed).catch(console.error);
     }
 
     let stream = null;
@@ -42,7 +46,10 @@ module.exports = {
       }
 
       console.error(error);
-      return message.channel.send(`Error: ${error.message ? error.message : error}`);
+			const errorEmbed = new MessageEmbed()
+				.setColor(0xffd1dc)
+				.setDescription(`Error: ${error.message ? error.message : error}`)
+      return message.channel.send(errorEmbed);
     }
 
     queue.connection.on("disconnect", () => message.client.queue.delete(message.guild.id));
@@ -72,7 +79,10 @@ module.exports = {
     dispatcher.setVolumeLogarithmic(queue.volume / 100);
 
     try {
-      var playingMessage = await queue.textChannel.send(`🎶 Started playing: **${song.title}**`);
+			const playEmbed = new MessageEmbed()
+				.setColor(0xffd1dc)
+				.setDescription(`🎶 Started playing: **${song.title}**`)
+      var playingMessage = await queue.textChannel.send(playEmbed);
       await playingMessage.react("⏭");
       await playingMessage.react("⏯");
       await playingMessage.react("🔁");
@@ -96,7 +106,10 @@ module.exports = {
           reaction.users.remove(user).catch(console.error);
           if (!canModifyQueue(member)) return;
           queue.connection.dispatcher.end();
-          queue.textChannel.send(`${user.username} skipped the song`).catch(console.error);
+					const skipEmbed = new MessageEmbed()
+						.setColor(0xffd1dc)
+						.setDescription(`${user.username} skipped the song`)
+          queue.textChannel.send(skipEmbed).catch(console.error);
           collector.stop();
           break;
 
@@ -106,11 +119,17 @@ module.exports = {
           if (queue.playing) {
             queue.playing = !queue.playing;
             queue.connection.dispatcher.pause(true);
-            queue.textChannel.send(`${user.username} paused the music.`).catch(console.error);
+						const pauseEmbed = new MessageEmbed()
+							.setColor(0xffd1dc)
+							.setDescription(`${user.username} paused the music.`)
+            queue.textChannel.send(pauseEmbed).catch(console.error);
           } else {
             queue.playing = !queue.playing;
             queue.connection.dispatcher.resume();
-            queue.textChannel.send(`${user.username} resumed the music!`).catch(console.error);
+						const unpauseEmbed = new MessageEmbed()
+							.setColor(0xffd1dc)
+							.setDescription(`${user.username} resumed the music!`)
+            queue.textChannel.send(unpauseEmbed).catch(console.error);
           }
           break;
 
@@ -118,14 +137,20 @@ module.exports = {
           reaction.users.remove(user).catch(console.error);
           if (!canModifyQueue(member)) return;
           queue.loop = !queue.loop;
-          queue.textChannel.send(`Loop is now ${queue.loop ? "**on**" : "**off**"}`).catch(console.error);
+					const loopEmbed = new MessageEmbed()
+						.setColor(0xffd1dc)
+						.setDescription(`Loop is now ${queue.loop ? "**on**" : "**off**"}`)
+          queue.textChannel.send(loopEmbed).catch(console.error);
           break;
 
         case "⏹":
           reaction.users.remove(user).catch(console.error);
           if (!canModifyQueue(member)) return;
           queue.songs = [];
-          queue.textChannel.send(`${user.username} stopped the music!`).catch(console.error);
+					const stopEmbed = new MessageEmbed()
+						.setColor(0xffd1dc)
+						.setDescription(`${user.username} stopped the music!`)
+          queue.textChannel.send(stopEmbed).catch(console.error);
           try {
             queue.connection.dispatcher.end();
           } catch (error) {

@@ -1,7 +1,17 @@
 exports.run = (client, message) => {
   const { canModifyQueue } = require("../util/CutieUtil");
   const queue = message.client.queue.get(message.guild.id);
-  if (!queue) return message.channel.send("There is no queue.").catch(console.error);
+	const { Client, MessageEmbed } = require('discord.js');
+
+	const whereQ = new MessageEmbed()
+		.setColor(0xffd1dc)
+		.setDescription(`There is no queue`)
+
+	const shuffleEmbed = new MessageEmbed()
+		.setColor(0xffd1dc)
+		.setDescription(`${message.author.username} shuffled the queue`)
+
+  if (!queue) return message.channel.send(whereQ).catch(console.error);
   if (!canModifyQueue(message.member)) return;
 
   let songs = queue.songs;
@@ -11,5 +21,5 @@ exports.run = (client, message) => {
   }
   queue.songs = songs;
   message.client.queue.set(message.guild.id, queue);
-  queue.textChannel.send(`${message.author.username} shuffled the queue`).catch(console.error);
+  queue.textChannel.send(shuffleEmbed).catch(console.error);
 }
