@@ -14,6 +14,7 @@ module.exports = (client, message) => {
 		.addField(`Message Author`, `${message.author}`)
 		.setTimestamp(`${actionDate}`)
 
+	if (!client.logger.has(key) return;
 	const sendChnl = client.logger.get(key, "logChnl")
 	client.channels.cache.get(sendChnl).send(embed)
 }
