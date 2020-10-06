@@ -31,6 +31,7 @@ Its current prefix is "qt"
 
 **colors** - brings up a list of some common hex codes
 **colorme <hex code>** - changes your color to your given hex code
+**currentcol** - reports your current color in hex
 **cleancol** - removes your color`
 
   const music = `__*Music*__
