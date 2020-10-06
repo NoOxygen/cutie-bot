@@ -28,6 +28,7 @@ ${header}
 **anon-setup** - set anon channel
 **ticket-setup** - set ticket channel
 **modclose** - close ticket channel
+**logger** - set logging channel
 
 I believe these commands are pretty self explanatory :)`);
     message.channel.send(embed);

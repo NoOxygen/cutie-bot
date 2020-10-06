@@ -9,7 +9,8 @@ exports.run = (client, message, [srvr, ...confession]) => {
       .setDescription(`${confession.join(" ")}`)
       .setFooter(`${actionDate}`)
 
-
+  	if (!client.logger.has(srvr)) return;
+    if (client.confess.get(srvr, "anonChnl") === null) return;
     const sendSrvr = client.confess.get(srvr, "guild")
     const sendChnl = client.confess.get(srvr, "anonChnl")
 
