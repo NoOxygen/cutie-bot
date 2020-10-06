@@ -11,6 +11,6 @@ exports.run = (client, message) => {
   queue.connection.dispatcher.end();
   const stopEmbed = new MessageEmbed()
     .setColor(0xffd1dc)
-    .setDescription(`${user.username} stopped the music!`)
+    .setDescription(`${message.author.username} stopped the music!`)
   queue.textChannel.send(stopEmbed).catch(console.error);
 }
