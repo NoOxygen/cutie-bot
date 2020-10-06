@@ -1,7 +1,7 @@
 module.exports = (client, member) => {
 	const { MessageEmbed } = require("discord.js");
 	const moment = require("moment-timezone");
-	actionDate = moment().format('hh:mm DD/MM/YYYY')
+	actionDate = moment(Date.now()).format('hh:mm DD/MM/YYYY')
   var role = member.guild.roles.cache.find(role => role.name == 'unverified')
   if (!role) {
     member.guild.roles.create({
