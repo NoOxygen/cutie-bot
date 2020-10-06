@@ -17,7 +17,7 @@ module.exports = (client, oldMessage, newMessage) => {
 		.addField(`New Message`, newMessage.content)
 		.setTimestamp(`${actionDate}`)
 
-	if (!client.logger.has(key) return;
+	if (!client.logger.has(key)) return;
 	const sendChnl = client.logger.get(key, "logChnl")
 	client.channels.cache.get(sendChnl).send(embed)
 }
