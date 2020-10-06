@@ -22,7 +22,7 @@ exports.run = (client, message, [mention, ...reason]) => {
   const logChannel = message.guild.channels.cache.find(channel => channel.name === "mod-log").id;
   if (!logChannel) return;
   client.channels.cache.get(logChannel).send(`
-**user:** ${message.user.tag}
+**user:** ${mention}
 **action taken:** kick
 **reason for action:** ${reason.join(" ")}
 **date/time and timezone:** ${actionDate} GMT
