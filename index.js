@@ -22,6 +22,7 @@ client.settings = new Enmap({
     fetchAll: true
 });
 client.confess = new Enmap({name: "confess"})
+client.logger = new Enmap({name: "logger"})
 
 fs.readdir("./events/", (err, files) => {
   if (err) return console.error(err);

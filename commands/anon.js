@@ -16,5 +16,5 @@ exports.run = (client, message, [srvr, ...confession]) => {
     if (srvr === sendSrvr){
       client.channels.cache.get(sendChnl).send(embed).catch(console.error);
     }
-  }
+  } else {}
 }
