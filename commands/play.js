@@ -17,7 +17,7 @@ exports.run = async (client, message, args) => {
     let errorEmbed = new MessageEmbed()
       .setColor(0xffd1dc)
       .setDescription(`You didn't tell me what to play`)
-    return message
+    return message.channel
       .send(errorEmbed)
       .catch(console.error);
   }
