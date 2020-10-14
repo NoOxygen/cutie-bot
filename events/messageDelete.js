@@ -19,6 +19,7 @@ module.exports = (client, message) => {
 			.setTimestamp(`${actionDate}`)
 		const sendChnl = client.logger.get(key, "logChnl")
 		client.channels.cache.get(sendChnl).send(embed)
+	} else if (message.author.bot) {
 	} else {
 		const embed = new MessageEmbed()
 			.setColor(0xffd1dc)
