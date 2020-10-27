@@ -18,18 +18,18 @@
   "homepage": "https://github.com/Sid127/cutie-bot#readme",
   "description": "",
   "dependencies": {
-    "@discordjs/opus": "^0.3.2",
-    "better-sqlite3": "^7.1.0",
-    "discord.js": "^12.3.1",
-    "enmap": "^5.7.1",
+    "@discordjs/opus": "^0.3.3",
+    "better-sqlite3": "^7.1.1",
+    "discord.js": "^12.4.1",
+    "enmap": "^5.8.0",
     "ffmpeg-static": "^4.2.7",
     "hastebin-gen": "^2.0.5",
-    "lyrics-finder": "^21.3.3",
+    "lyrics-finder": "^21.4.0",
     "moment-timezone": "^0.5.31",
     "simple-youtube-api": "^5.2.1",
-    "soundcloud-downloader": "^0.1.6",
+    "soundcloud-downloader": "^0.1.8",
     "string-progressbar": "^1.0.1",
-    "ytdl-core": "^3.2.2",
-    "ytdl-core-discord": "^1.2.1"
+    "ytdl-core": "^4.0.0",
+    "ytdl-core-discord": "^1.2.4"
   }
 }
