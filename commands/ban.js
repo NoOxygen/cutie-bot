@@ -16,7 +16,7 @@ exports.run = (client, message, [mention, ...reason]) => {
 
   const banMember = message.mentions.members.first();
 
-  banMember.ban(reason.join(" ")).then(member => {
+  banMember.ban({reason: reason.join(" ")}).then(member => {
     message.reply(`${member.user.username} was succesfully banned.`);
 
   const logChannel = message.guild.channels.cache.find(channel => channel.name === "mod-log").id;

@@ -16,7 +16,7 @@ exports.run = (client, message, [mention, ...reason]) => {
 
   const kickMember = message.mentions.members.first();
 
-  kickMember.kick(reason.join(" ")).then(member => {
+  kickMember.kick({reason: reason.join(" ")}).then(member => {
     message.reply(`${member.user.username} was succesfully kicked.`);
 
   const logChannel = message.guild.channels.cache.find(channel => channel.name === "mod-log").id;
