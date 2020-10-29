@@ -1,4 +1,4 @@
-exports.run = (client, message, [chnl, ...text) => {
+exports.run = (client, message, [chnl, ...text]) => {
 	if(!message.member.hasPermission('ADMINISTRATOR'))
     return;
 

@@ -15,6 +15,7 @@ exports.run = (client, message, [mention, ...reason]) => {
     return message.reply("");
 
   const kickMember = message.mentions.members.first();
+	const log = kickMember.tag;
 
   kickMember.kick({reason: reason.join(" ")}).then(member => {
     message.reply(`${member.user.username} was succesfully kicked.`);
@@ -22,10 +23,9 @@ exports.run = (client, message, [mention, ...reason]) => {
   const logChannel = message.guild.channels.cache.find(channel => channel.name === "mod-log").id;
   if (!logChannel) return;
   client.channels.cache.get(logChannel).send(`
-**user:** ${mention}
+**user:** ${log}
 **action taken:** kick
 **reason for action:** ${reason.join(" ")}
-**date/time and timezone:** ${actionDate} GMT
-**notes:** (in next message)`).catch(console.error);
+**date/time and timezone:** ${actionDate} GMT`).catch(console.error);
   });
 };
