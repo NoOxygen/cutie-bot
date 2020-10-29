@@ -1,6 +1,5 @@
 exports.run = (client, message, args) => {
-  const {OWNER_ID} = require("../config.json");
-  if (message.author.id === OWNER_ID) {
+  if (message.member.hasPermission('ADMINISTRATOR')) {
     if(!args || args.length < 1) return message.channel.send("Must provide a command name to reload.");
     const commandName = args[0];
     // Check if the command exists and is valid

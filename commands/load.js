@@ -1,6 +1,5 @@
 exports.run = (client, message, args) => {
-  const {OWNER_ID} = require("../config.json");
-  if (message.author.id === OWNER_ID) {
+  if (message.member.hasPermission('ADMINISTRATOR')) {
     let props = require(`./${args[0]}.js`);
     // Get just the command name from the file name
     let commandName = args[0];

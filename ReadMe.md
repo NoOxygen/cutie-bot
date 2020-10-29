@@ -19,7 +19,6 @@ for Linux - https://github.com/nodesource/distributions/blob/master/README.md
     "prefix": "<yourPrefix>",
     "YOUTUBE_API_KEY": "<your YouTube key>",
     "SOUNDCLOUD_CLIENT_ID": "<Your SoundCloud Client ID>",
-    "OWNER_ID": <Discord ID of the Host owner>
     "MAX_PLAYLIST_SIZE": 10,
     "PRUNING": true
 }
