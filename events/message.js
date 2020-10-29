@@ -2,6 +2,19 @@ module.exports = (client, message) => {
   // Ignore all bots
   if (message.author.bot) return;
 
+	if (message.content.toLowerCase().includes("thanks cutie"))
+  	message.channel.send("You're Welcome! :purple_heart:"); //You're Welcome! :heart:
+  if (message.content.toLowerCase().includes("sorry cutie"))
+  	message.channel.send("It's ok fren :purple_heart:"); //It's ok fren :purple_heart:
+  if (message.content.toLowerCase().includes("happy birthday cutie"))
+  	message.channel.send("Thanks fren! :cake: :purple_heart:");
+  if (message.content.toLowerCase().includes("love you cutie"))
+  	message.channel.send("I love you too fren :purple_heart:");
+
+	if (message.content.includes("discord.gg") || message.content.includes("discordapp.com/invite") || message.content.includes("discord.com/invite")) {
+	  message.delete()
+  }
+
   // If this is not in a DM, execute the points code.
   if (message.guild) {
     // We'll use the key often enough that simplifying it is worth the trouble.
