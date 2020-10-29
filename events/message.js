@@ -15,7 +15,16 @@ module.exports = (client, message) => {
 	  message.delete()
   }
 
-  // If this is not in a DM, execute the points code.
+  if (message.channel.type === 'dm'){
+		if (message.content.toLowerCase().includes("anon")){} else {
+		  const cleverbot = require("cleverbot-free");
+
+      // Without context
+      cleverbot(`${message.content}`).then(response => message.channel.send(response));
+		}
+	}
+
+	// If this is not in a DM, execute the points code.
   if (message.guild) {
     // We'll use the key often enough that simplifying it is worth the trouble.
     const key = `${message.guild.id}-${message.author.id}`;
