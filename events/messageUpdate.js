@@ -3,6 +3,7 @@ module.exports = (client, oldMessage, newMessage) => {
 	const moment = require("moment-timezone");
 	actionDate = moment(Date.now()).format('hh:mm DD/MM/YYYY')
 
+	if(oldMessage.channel.type === 'dm') return;
   if (oldMessage.partial) return;
 	if (oldMessage.content === null) return;
 	if (oldMessage.embeds[0] != null) return;

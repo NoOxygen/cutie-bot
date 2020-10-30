@@ -1,6 +1,7 @@
 module.exports = (client, message) => {
 	const { MessageEmbed } = require("discord.js");
 	const moment = require("moment-timezone");
+	if(message.channel.type === 'dm') return;
 	actionDate = moment(Date.now()).format('hh:mm DD/MM/YYYY')
   const key = `${message.guild.id}`
 

@@ -2,6 +2,7 @@ module.exports = async (client, reaction, user) => {
   const Discord = require("discord.js");
   const ticCat = client.channels.cache.find(c=>["ticket support", "tickets"].includes(c.name)).id
 
+	if(reaction.message.channel.type === 'dm') return;
   if(user.partial) await user.fetch();
   if(reaction.partial) await reaction.fetch();
   if(reaction.message.partial) await reaction.message.fetch();
