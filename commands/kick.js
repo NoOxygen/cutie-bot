@@ -15,7 +15,7 @@ exports.run = (client, message, [mention, ...reason]) => {
     return message.reply("");
 
   const kickMember = message.mentions.members.first();
-	const log = kickMember.tag;
+	const log = message.mentions.users.first().tag;
 
   kickMember.kick({reason: reason.join(" ")}).then(member => {
     message.reply(`${member.user.username} was succesfully kicked.`);

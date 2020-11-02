@@ -15,7 +15,7 @@ exports.run = (client, message, [mention, ...reason]) => {
     return message.reply("");
 
   const banMember = message.mentions.members.first();
-	const log = banMember.tag;
+	const log = message.mentions.users.first().tag;
 
   banMember.ban({reason: reason.join(" ")}).then(member => {
     message.reply(`${member.user.username} was succesfully banned.`);
