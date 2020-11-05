@@ -20,6 +20,7 @@ Its current prefix is "qt"
   const miscList = `__*Miscellaneous*__
 
 **ping** - checks if the bot is working or not
+**pfp** - get a user's profile picture
 **aww** - sends a random image/post from r/aww
 **points** - check your points on this server
 **leaderboard** - get the top 10 users on this server
@@ -36,21 +37,21 @@ Its current prefix is "qt"
 
   const music = `__*Music*__
 
-  **play** - plays a song/playlist by name/url
-  **pause**
-  **resume** - the _play_ command does NOT resume
-  **playlist** - plays a playlist from url
-  **np** - shows info on current track
-  **lyrics** - attempts to find lyrics for the song
-  **loop** - toggle queue loop
-  **queue** - get queue
-  **remove** - remove a song from the queue
-  **search**
-  **shuffle**
-  **skip**
-  **skipto** - same as skip, but can jump to another position in queue
-  **stop** - stops all music and clears queue
-  **leave** - disconnect bot`
+**play** - plays a song/playlist by name/url
+**pause**
+**resume** - the _play_ command does NOT resume
+**playlist** - plays a playlist from url
+**np** - shows info on current track
+**lyrics** - attempts to find lyrics for the song
+**loop** - toggle queue loop
+**queue** - get queue
+**remove** - remove a song from the queue
+**search**
+**shuffle**
+**skip**
+**skipto** - same as skip, but can jump to another position in queue
+**stop** - stops all music and clears queue
+**leave** - disconnect bot`
 
   if (args.length < 1) {
     const embed = new MessageEmbed()
