@@ -1,8 +1,8 @@
 module.exports = {
   apps : [{
-    script: 'index.js',
-    watch: 'true',
-		ignore_watch: [“node_modules”],
+    name: 'Cutie',
+		script: 'index.js',
+    watch: 'false',
 		log_file: 'log.log',
 		time: true,
 		exp_backoff_restart_delay: 100
