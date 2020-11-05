@@ -2,3 +2,5 @@ config.json
 node_modules
 data
 log.log
+err.log
+out.log
