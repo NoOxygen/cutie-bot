@@ -3,5 +3,7 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
     return;
 	const sh = require('shelljs');
 
-	sh.exec('git pull && npm install')
+  var output = sh.exec('git pull').stdout;
+	message.channel.send("```" + output + "```")
+	sh.exec('npm install')
 };
