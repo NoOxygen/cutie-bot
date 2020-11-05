@@ -29,6 +29,7 @@
     "moment-duration-format": "^2.3.2",
     "moment-timezone": "^0.5.31",
     "random-puppy": "^1.1.0",
+    "shelljs": "^0.8.4",
     "simple-youtube-api": "^5.2.1",
     "soundcloud-downloader": "^0.1.8",
     "string-progressbar": "^1.0.1",
