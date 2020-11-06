@@ -11,9 +11,9 @@ module.exports = (client, message) => {
   if (message.content.toLowerCase().includes("love you cutie"))
   	message.channel.send("I love you too fren :purple_heart:");
 
-	if (message.content.includes("discord.gg") || message.content.includes("discordapp.com/invite") || message.content.includes("discord.com/invite")) {
-	  message.delete()
-  }
+	// if (message.content.includes("discord.gg") || message.content.includes("discordapp.com/invite") || message.content.includes("discord.com/invite")) {
+	//   message.delete()
+  // }
 
   if (message.channel.type === 'dm'){
 		if (message.content.toLowerCase().includes("anon")){} else {
