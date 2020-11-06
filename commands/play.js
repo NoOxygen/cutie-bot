@@ -7,6 +7,7 @@ exports.run = async (client, message, args) => {
   const youtube = new YouTubeAPI(YOUTUBE_API_KEY);
   const scdl = require("soundcloud-downloader");
   const { channel } = message.member.voice;
+  var t = 0
 
   const serverQueue = message.client.queue.get(message.guild.id);
   if (!channel) return message.channel.send("You need to join a voice channel first!").catch(console.error);
@@ -105,13 +106,19 @@ exports.run = async (client, message, args) => {
   }
   } else {
       try {
-        const results = await youtube.searchVideos(search, 1);
-        songInfo = await ytdl.getInfo(results[0].url);
-        song = {
-          title: songInfo.videoDetails.title,
-          url: songInfo.videoDetails.video_url,
-          duration: songInfo.videoDetails.lengthSeconds
-      };
+        do {
+					t = t + 1
+					if(t === 5){
+						break;
+					}
+					const results = await youtube.searchVideos(search, 1);
+	        songInfo = await ytdl.getInfo(results[0].url);
+	        song = {
+	          title: songInfo.videoDetails.title,
+	          url: songInfo.videoDetails.video_url,
+	          duration: songInfo.videoDetails.lengthSeconds
+	        };
+				} while (error)
     } catch (error) {
       console.error(error);
       const errorEmbed = new MessageEmbed()
