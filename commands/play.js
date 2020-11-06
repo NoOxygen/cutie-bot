@@ -109,6 +109,7 @@ exports.run = async (client, message, args) => {
         do {
 					t = t + 1
 					if(t === 5){
+						var t = 0;
 						break;
 					}
 					const results = await youtube.searchVideos(search, 1);
