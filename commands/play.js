@@ -118,13 +118,13 @@ exports.run = async (client, message, args) => {
 	          url: songInfo.videoDetails.video_url,
 	          duration: songInfo.videoDetails.lengthSeconds
 	        };
-				} while (error)
+				} while (!song.title)
     } catch (error) {
+			if (error == undefined || error == null) {
+				return;
+			}
       console.error(error);
-      const errorEmbed = new MessageEmbed()
-        .setColor(0xffd1dc)
-        .setDescription("No video was found with a matching title")
-      return message.channel.send(errorEmbed).catch(console.error);
+      message.client.commands.get("search").run(client, message, [search])
     }
   }
 

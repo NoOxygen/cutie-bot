@@ -11,10 +11,10 @@ module.exports = {
     if (!song) {
       queue.channel.leave();
       message.client.queue.delete(message.guild.id);
-      const endEmbed = new MessageEmbed()
-        .setColor(0xffd1dc)
-        .setDescription("Music queue ended.")
-      return queue.textChannel.send(endEmbed).catch(console.error);
+      // const endEmbed = new MessageEmbed()
+      //   .setColor(0xffd1dc)
+      //   .setDescription("Music queue ended.")
+      // return queue.textChannel.send(endEmbed).catch(console.error);
     }
 
     let stream = null;
