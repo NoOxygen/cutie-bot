@@ -8,6 +8,7 @@ exports.run = async (client, message, args) => {
   const scdl = require("soundcloud-downloader");
   const { channel } = message.member.voice;
   var t = 0
+	var q = 0
 
   const serverQueue = message.client.queue.get(message.guild.id);
   if (!channel) return message.channel.send("You need to join a voice channel first!").catch(console.error);
@@ -67,15 +68,25 @@ exports.run = async (client, message, args) => {
 
   if (urlValid) {
     try {
-      songInfo = await ytdl.getInfo(url);
-      song = {
-        title: songInfo.videoDetails.title,
-        url: songInfo.videoDetails.video_url,
-        duration: songInfo.videoDetails.lengthSeconds
-      };
+			do {
+				q = q + 1
+				if(q === 5){
+					var q = 0;
+					break;
+				}
+				songInfo = await ytdl.getInfo(url);
+	      song = {
+	        title: songInfo.videoDetails.title,
+	        url: songInfo.videoDetails.video_url,
+	        duration: songInfo.videoDetails.lengthSeconds
+	      };
+			} while (!song.title)
     } catch (error) {
+			if (error == undefined || error == null) {
+				return;
+			}
       console.error(error);
-      return message.channel.send(error.message).catch(console.error);
+			return message.channel.send("There was an error :(")
     }
   } else if (scRegex.test(url)) {
     // It is a valid Soundcloud URL
