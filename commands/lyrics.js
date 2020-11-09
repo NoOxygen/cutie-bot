@@ -6,11 +6,22 @@ exports.run = async (client, message) => {
 
   let lyrics = null;
 
+  songName = queue.songs[0].title;
+
+	// remove stuff like (Official Video)
+	songName = songName.replace(/ *\([^)]*\) */g, '');
+
+	// remove emojis
+	songName = songName.replace(
+		/([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g,
+		''
+	);
+
   try {
-    lyrics = await lyricsFinder(queue.songs[0].title, "");
-    if (!lyrics) lyrics = `No lyrics found for ${queue.songs[0].title}.`;
+    lyrics = await lyricsFinder(songName, "");
+    if (!lyrics) lyrics = `No lyrics found for ${songName}.`;
   } catch (error) {
-    lyrics = `No lyrics found for ${queue.songs[0].title}.`;
+    lyrics = `No lyrics found for ${songName}.`;
   }
 
   let lyricsEmbed = new MessageEmbed()
