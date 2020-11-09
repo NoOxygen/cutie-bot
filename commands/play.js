@@ -130,6 +130,7 @@ exports.run = async (client, message, args) => {
   }
 
   if (serverQueue) {
+		if (serverQueue.songs[serverQueue.songs.length - 1].url == song.url) return message.channel.send ("that song already is in the queue");
     serverQueue.songs.push(song);
     const addEmbed = new MessageEmbed()
       .setColor(0xffd1dc)
