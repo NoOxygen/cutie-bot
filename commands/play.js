@@ -68,26 +68,15 @@ exports.run = async (client, message, args) => {
 
   if (urlValid) {
     try {
-			do {
-				q = q + 1
-				if(q === 5){
-					var q = 0;
-					break;
-				}
-				songInfo = await ytdl.getInfo(url);
-	      song = {
-	        title: songInfo.videoDetails.title,
-	        url: songInfo.videoDetails.video_url,
-	        duration: songInfo.videoDetails.lengthSeconds
-	      };
-			} while (!song.title)
+			songInfo = await ytdl.getInfo(url);
+	    song = {
+	      title: songInfo.videoDetails.title,
+	      url: songInfo.videoDetails.video_url,
+	      duration: songInfo.videoDetails.lengthSeconds
+	    };
     } catch (error) {
-			if (error == undefined || error == null) {
-				return;
-			}
       console.error(error);
-			return message.channel.send("There was an error :(")
-    }
+      return message.channel.send(error.message).catch(console.error);    }
   } else if (scRegex.test(url)) {
     // It is a valid Soundcloud URL
     if (!SOUNDCLOUD_CLIENT_ID){
@@ -132,11 +121,11 @@ exports.run = async (client, message, args) => {
 	        };
 				} while (!song.title)
     } catch (error) {
-			if (error == undefined || error == null) {
-				return;
-			}
       console.error(error);
-      message.client.commands.get("search").run(client, message, [search])
+			const errorEmbed = new MessageEmbed()
+        .setColor(0xffd1dc)
+        .setDescription("No video was found with a matching title")
+      return message.channel.send(errorEmbed).catch(console.error);
     }
   }
 
