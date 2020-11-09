@@ -1,7 +1,5 @@
 exports.run = (client, message, [param, ...announcement]) => {
   const { Client, MessageEmbed } = require('discord.js');
-  const moment = require("moment-timezone");
-  actionDate = moment(message.createdTimestamp).format('hh:mm DD/MM/YYYY')
 
   if(!message.member.hasPermission('ADMINISTRATOR'))
     return message.reply("you can't use this command.");
@@ -21,7 +19,7 @@ exports.run = (client, message, [param, ...announcement]) => {
     const embed = new MessageEmbed()
       .setColor(0xffd1dc)
       .setDescription(`${announcement.join(" ")}`)
-      .setFooter(`${actionDate}`)
+      .setTimestamp();
     let channel = message.mentions.channels.first();
     message.guild.channels.cache.get(channel.id).send(embed)
   }

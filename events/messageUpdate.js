@@ -1,7 +1,5 @@
 module.exports = (client, oldMessage, newMessage) => {
 	const { MessageEmbed } = require("discord.js");
-	const moment = require("moment-timezone");
-	actionDate = moment(Date.now()).format('hh:mm DD/MM/YYYY')
 
 	if(oldMessage.channel.type === 'dm') return;
   if (oldMessage.partial) return;
@@ -16,7 +14,7 @@ module.exports = (client, oldMessage, newMessage) => {
 		.addField(`Message Author`, `${oldMessage.author}`)
 		.addField(`Old Message`, oldMessage.content)
 		.addField(`New Message`, newMessage.content)
-		.setTimestamp(`${actionDate}`)
+		.setTimestamp()
 
 	if (!client.logger.has(key)) return;
 	if (client.logger.get(key, "logChnl") === null) return;

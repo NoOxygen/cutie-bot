@@ -24,7 +24,7 @@ exports.run = (client, message, [mention, ...reason]) => {
   if (!logChannel) return;
   client.channels.cache.get(logChannel).send(`
 **user:** ${log}
-**action taken:** kick
+**action taken:** ban
 **reason for action:** ${reason.join(" ")}
 **date/time and timezone:** ${actionDate} GMT`).catch(console.error);
   });

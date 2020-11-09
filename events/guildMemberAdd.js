@@ -1,7 +1,5 @@
 module.exports = (client, member) => {
 	const { MessageEmbed } = require("discord.js");
-	const moment = require("moment-timezone");
-	actionDate = moment(Date.now()).format('hh:mm DD/MM/YYYY')
   var role = member.guild.roles.cache.find(role => role.name == 'unverified')
   if (!role) {
     member.guild.roles.create({
@@ -20,7 +18,7 @@ module.exports = (client, member) => {
 	const embed = new MessageEmbed()
 		.setColor(0xffd1dc)
 		.setDescription(`${member.user} joined the server`)
-		.setFooter(`${actionDate}`)
+    .setTimestamp();
 
 	if (!client.logger.has(key)) return;
 	if (client.logger.get(key, "logChnl") === null) return;
