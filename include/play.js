@@ -10,6 +10,7 @@ module.exports = {
 
     if (!song) {
       queue.channel.leave();
+			message.client.past = [];
       message.client.queue.delete(message.guild.id);
       // const endEmbed = new MessageEmbed()
       //   .setColor(0xffd1dc)
@@ -41,6 +42,7 @@ module.exports = {
       }
     } catch (error) {
       if (queue) {
+				message.client.past.push(queue.songs[0]);
         queue.songs.shift();
         module.exports.play(queue.songs[0], message);
       }
@@ -67,12 +69,14 @@ module.exports = {
           module.exports.play(queue.songs[0], message);
         } else {
           // Recursively play the next song
+					message.client.past.push(queue.songs[0]);
           queue.songs.shift();
           module.exports.play(queue.songs[0], message);
         }
       })
       .on("error", (err) => {
         console.error(err);
+				message.client.past.push(queue.songs[0]);
         queue.songs.shift();
         module.exports.play(queue.songs[0], message);
       });
@@ -83,8 +87,9 @@ module.exports = {
         .setColor(0xffd1dc)
         .setDescription(`🎶 Started playing: **${song.title}**`)
       var playingMessage = await queue.textChannel.send(playEmbed);
-      await playingMessage.react("⏭");
+			await playingMessage.react("⏮️");
       await playingMessage.react("⏯");
+			await playingMessage.react("⏭");
       await playingMessage.react("🔁");
       await playingMessage.react("⏹");
     } catch (error) {
@@ -112,6 +117,15 @@ module.exports = {
           queue.textChannel.send(skipEmbed).catch(console.error);
           collector.stop();
           break;
+
+					case "⏮️":
+						queue.playing = true;
+						reaction.users.remove(user).catch(console.error);
+						if (!canModifyQueue(member)) return;
+            const cmd = message.client.commands.get("back")
+						cmd.run(message.client, message)
+						collector.stop();
+						break;
 
         case "⏯":
           reaction.users.remove(user).catch(console.error);

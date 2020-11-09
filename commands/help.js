@@ -49,7 +49,7 @@ Its current prefix is "qt"
 **search**
 **shuffle**
 **skip**
-**skipto** - same as skip, but can jump to another position in queue
+**back**
 **stop** - stops all music and clears queue
 **leave** - disconnect bot`
 
