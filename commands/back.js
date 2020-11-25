@@ -8,7 +8,7 @@ exports.run = (client, message) => {
     .setColor(0xffd1dc)
     .setDescription("There is nothing that I could go back to for you.")
 
-  if (client.past === [])
+  if (client.past.length === 0)
     return message.channel.send(errorEmbed).catch(console.error);
   if (!canModifyQueue(message.member)) return;
 

@@ -8,6 +8,8 @@ exports.run = (client, message) => {
 
   console.log(description.length)
 
+  console.log(past)
+
   if (description.length === 1) {
 		const freshEmbed = new MessageEmbed()
 			.setTitle("Cutie Music Queue")

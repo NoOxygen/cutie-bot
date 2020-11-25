@@ -12,7 +12,7 @@ exports.run = (client, message, [param, ...announcement]) => {
     const embed = new MessageEmbed()
       .setColor(0xffd1dc)
       .setDescription(`${msg}`)
-      .setFooter(`${actionDate}`)
+      .setTimestamp();
 
     message.guild.channels.cache.get(channel.id).send(`@everyone`, embed)
   } else {
