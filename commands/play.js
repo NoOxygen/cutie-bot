@@ -63,6 +63,16 @@ exports.run = async (client, message, args) => {
     playing: true
   };
 
+	const pastConstruct = {
+    textChannel: message.channel,
+    channel,
+    connection: null,
+    songs: [],
+    loop: false,
+    volume: 100,
+    playing: true
+  };
+
   let songInfo = null;
   let song = null;
 
@@ -142,6 +152,7 @@ exports.run = async (client, message, args) => {
 
   queueConstruct.songs.push(song);
   message.client.queue.set(message.guild.id, queueConstruct);
+	message.client.past.set(message.guild.id, pastConstruct);
 
   try {
     queueConstruct.connection = await channel.join();

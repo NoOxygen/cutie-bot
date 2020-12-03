@@ -1,16 +1,17 @@
 exports.run = (client, message) => {
   const { MessageEmbed, splitMessage, escapeMarkdown } = require("discord.js");
   const queue = message.client.queue.get(message.guild.id);
+	const history = message.client.past.get(message.guild.id);
   if (!queue) return message.channel.send("There is nothing playing.").catch(console.error);
 
   const description = queue.songs.map((song, index) => `${index + 1}. ${escapeMarkdown(song.title)}`);
-	const past = client.past.map((song, index) => `${index + 1}. ${escapeMarkdown(song.title)}`);
+	const past = history.songs.map((song, index) => `${index + 1}. ${escapeMarkdown(song.title)}`);
 
   console.log(description.length)
 
   console.log(past)
 
-  if (description.length === 1) {
+  if (past.length === 0) {
 		const freshEmbed = new MessageEmbed()
 			.setTitle("Cutie Music Queue")
 			.addField("Queue", description)

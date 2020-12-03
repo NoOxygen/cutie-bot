@@ -39,6 +39,16 @@ exports.run = async (client, message, args) => {
     playing: true
   };
 
+	const pastConstruct = {
+    textChannel: message.channel,
+    channel,
+    connection: null,
+    songs: [],
+    loop: false,
+    volume: 100,
+    playing: true
+  };
+
   let song = null;
   let playlist = null;
   let videos = [];
@@ -60,7 +70,7 @@ exports.run = async (client, message, args) => {
         url: track.permalink_url,
         duration: track.duration / 1000
       }))
-    }  
+    }
   } else {
     try {
       const results = await youtube.searchPlaylists(search, 1, { part: "snippet" });
@@ -105,7 +115,10 @@ exports.run = async (client, message, args) => {
 
   message.channel.send(`${message.author.username} started a playlist`, playlistEmbed);
 
-  if (!serverQueue) message.client.queue.set(message.guild.id, queueConstruct);
+  if (!serverQueue) {
+    message.client.queue.set(message.guild.id, queueConstruct);
+		message.client.past.set(message.guild.id, pastConstruct);
+  }
 
   if (!serverQueue) {
     try {

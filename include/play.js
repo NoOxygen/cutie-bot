@@ -7,10 +7,11 @@ module.exports = {
   async play(song, message) {
     const { PRUNING, SOUNDCLOUD_CLIENT_ID } = require("../config.json");
     const queue = message.client.queue.get(message.guild.id);
+		const past = message.client.past.get(message.guild.id);
 
     if (!song) {
       queue.channel.leave();
-			message.client.past = [];
+      message.client.past.delete(message.guild.id);
       message.client.queue.delete(message.guild.id);
       // const endEmbed = new MessageEmbed()
       //   .setColor(0xffd1dc)
@@ -42,7 +43,7 @@ module.exports = {
       }
     } catch (error) {
       if (queue) {
-				message.client.past.push(queue.songs[0]);
+				past.songs.push(queue.songs[0]);
         queue.songs.shift();
         module.exports.play(queue.songs[0], message);
       }
@@ -69,14 +70,14 @@ module.exports = {
           module.exports.play(queue.songs[0], message);
         } else {
           // Recursively play the next song
-					message.client.past.push(queue.songs[0]);
+					past.songs.push(queue.songs[0]);
           queue.songs.shift();
           module.exports.play(queue.songs[0], message);
         }
       })
       .on("error", (err) => {
         console.error(err);
-				message.client.past.push(queue.songs[0]);
+				past.songs.push(queue.songs[0]);
         queue.songs.shift();
         module.exports.play(queue.songs[0], message);
       });

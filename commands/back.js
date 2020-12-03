@@ -4,6 +4,7 @@ exports.run = (client, message) => {
   const { Client, MessageEmbed } = require('discord.js');
 
   const queue = message.client.queue.get(message.guild.id);
+	const past = message.client.past.get(message.guild.id);
   const errorEmbed = new MessageEmbed()
     .setColor(0xffd1dc)
     .setDescription("There is nothing that I could go back to for you.")
@@ -14,6 +15,6 @@ exports.run = (client, message) => {
 
   queue.playing = true;
 	queue.songs.unshift(client.past[client.past.length - 1]);
-	client.past.pop();
+	past.songs.pop();
   play(queue.songs[0], message);
 }
