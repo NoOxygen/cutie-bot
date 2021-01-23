@@ -1,12 +1,12 @@
 exports.run = (client, message, args) => {
-  const { Client, MessageEmbed } = require('discord.js');
-  const header = `This bot is a homebrew bot and is being made by one (1) person as a community project/hobby. Support for the bot is NOT guaranteed.
+    const { Client, MessageEmbed } = require('discord.js');
+    const header = `This bot is a homebrew bot and is being made by one (1) person as a community project/hobby. Support for the bot is NOT guaranteed.
 
 Its current prefix is "qt"
 
 ***Current Command List:***`
 
-  const supportList = `__*Support*__
+    const supportList = `__*Support*__
 
 **spoilers** - tutorial on how to use spoilers
 **spoilers-guide** - info on when and where to use spoilers
@@ -17,25 +17,26 @@ Its current prefix is "qt"
 **distractme** - sends a cute video to help take your mind off of things`
 
 
-  const miscList = `__*Miscellaneous*__
+    const miscList = `__*Miscellaneous*__
 
 **ping** - checks if the bot is working or not
 **pfp** - get a user's profile picture
 **aww** - sends a random image/post from r/aww
 **points** - check your points on this server
 **leaderboard** - get the top 10 users on this server
-**levels** - get the full leaderboard as a one-time link`
+**levels** - get the full leaderboard as a one-time link
+**pronouns** - set your personal pronouns here`
 
-  const oSS = `This bot is open-source! Check out the source code at https://github.com/Sid127/cutie-bot`
+    const oSS = `This bot is open-source! Check out the source code at https://github.com/Sid127/cutie-bot`
 
-  const colorList = `__*Colors*__
+    const colorList = `__*Colors*__
 
 **colors** - brings up a list of some common hex codes
 **colorme <hex code>** - changes your color to your given hex code
 **currentcol** - reports your current color in hex
 **cleancol** - removes your color`
 
-  const music = `__*Music*__
+    const music = `__*Music*__
 
 **play** - plays a song/playlist by name/url
 **pause**
@@ -53,11 +54,11 @@ Its current prefix is "qt"
 **stop** - stops all music and clears queue
 **leave** - disconnect bot`
 
-  if (args.length < 1) {
-    const embed = new MessageEmbed()
-      .setTitle("**__CUTIE__**")
-      .setColor(0xffd1dc)
-      .setDescription(`
+    if (args.length < 1) {
+        const embed = new MessageEmbed()
+            .setTitle("**__CUTIE__**")
+            .setColor(0xffd1dc)
+            .setDescription(`
 ${header}
 
 ${music}
@@ -69,54 +70,50 @@ ${colorList}
 ${miscList}
 
 ${oSS}`);
-    message.channel.send(embed);
-  }
-  else if (args[0] === "misc") {
-    const embed = new MessageEmbed()
-      .setTitle("**__CUTIE__**")
-      .setColor(0xffd1dc)
-      .setDescription(`
+        message.channel.send(embed);
+    } else if (args[0] === "misc") {
+        const embed = new MessageEmbed()
+            .setTitle("**__CUTIE__**")
+            .setColor(0xffd1dc)
+            .setDescription(`
 ${header}
 
 ${miscList}
 
 ${oSS}`);
-    message.channel.send(embed);
-  }
-  else if (args[0] === "support") {
-    const embed = new MessageEmbed()
-      .setTitle("**__CUTIE__**")
-      .setColor(0xffd1dc)
-      .setDescription(`
+        message.channel.send(embed);
+    } else if (args[0] === "support") {
+        const embed = new MessageEmbed()
+            .setTitle("**__CUTIE__**")
+            .setColor(0xffd1dc)
+            .setDescription(`
 ${header}
 
 ${supportList}
 
 ${oSS}`);
-    message.channel.send(embed);
-  }
-  else if (args[0] === "color") {
-    const embed = new MessageEmbed()
-      .setTitle("**__CUTIE__**")
-      .setColor(0xffd1dc)
-      .setDescription(`
+        message.channel.send(embed);
+    } else if (args[0] === "color") {
+        const embed = new MessageEmbed()
+            .setTitle("**__CUTIE__**")
+            .setColor(0xffd1dc)
+            .setDescription(`
 ${header}
 
 ${colorList}
 
 ${oSS}`);
-    message.channel.send(embed);
-  }
-  else if (args[0] === "music") {
-    const embed = new MessageEmbed()
-      .setTitle("**__CUTIE__**")
-      .setColor(0xffd1dc)
-      .setDescription(`
+        message.channel.send(embed);
+    } else if (args[0] === "music") {
+        const embed = new MessageEmbed()
+            .setTitle("**__CUTIE__**")
+            .setColor(0xffd1dc)
+            .setDescription(`
 ${header}
 
 ${music}
 
 ${oSS}`);
-    message.channel.send(embed);
-  }
+        message.channel.send(embed);
+    }
 }
