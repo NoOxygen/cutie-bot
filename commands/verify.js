@@ -1,9 +1,9 @@
 exports.run = async(client, message, args, level) => { // eslint-disable-line no-unused-vars
-    if (!message.member.hasPermission('MANAGE_MEMBERS'))
+    if (!message.member.hasPermission('MANAGE_ROLES'))
         return;
 
     if (message.mentions.members.size === 0)
-        return message.reply("please mention a user to kick");
+        return message.reply("please mention a user to verify");
 
     let verifyMember = message.mentions.members.first();
 
@@ -13,6 +13,5 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
 
     if (args[0] === "18") {
         verifyMember.roles.add(message.guild.roles.cache.find(role => role.name === "senior citizen"))
-    }
-
+    } else {}
 }
