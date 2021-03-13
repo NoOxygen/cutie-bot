@@ -3,11 +3,11 @@ module.exports = client => {
     client.user.setPresence({
         status: 'online',
         activity: {
-            name: "qt help | v3.5",
+            name: "qt help | v3.6",
             type: "LISTENING"
         }
     });
 
     // tell host that bot is online
-    console.log(`CUTIE v3.5 is now online`);
+    console.log(`CUTIE v3.6 is now online`);
 };

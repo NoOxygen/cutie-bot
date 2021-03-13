@@ -1,20 +1,20 @@
-exports.run = (client, message, args) => {
-  // Let's clean up the database of all "old" users,
-  // and those who haven't been around for... say a month.
+exports.run = async(client, message, args) => {
+    // Let's clean up the database of all "old" users,
+    // and those who haven't been around for... say a month.
 
-  // Get a filtered list (for this guild only).
-  const filtered = client.points.filter( p => p.guild === message.guild.id );
+    // Get a filtered list (for this guild only).
+    const filtered = await client.points.filter(p => p.guild === message.guild.id);
 
-  // We then filter it again (ok we could just do this one, but for clarity's sake...)
-  // So we get only users that haven't been online for a month, or are no longer in the guild.
-  const rightNow = new Date();
-  const toRemove = filtered.filter(data => {
-    return !message.guild.members.cache.has(data.user) || rightNow - 2592000000 > data.lastSeen;
-  });
+    // We then filter it again (ok we could just do this one, but for clarity's sake...)
+    // So we get only users that haven't been online for a month, or are no longer in the guild.
+    const rightNow = new Date();
+    const toRemove = filtered.filter(data => {
+        return !message.guild.members.cache.has(data.user) || rightNow - 2592000000 > data.lastSeen;
+    });
 
-  toRemove.forEach(data => {
-    client.points.delete(`${message.guild.id}-${data.user}`);
-  });
+    toRemove.forEach = async(data) => {
+        await client.points.delete(`${message.guild.id}-${data.user}`);
+    };
 
-  message.channel.send(`I've cleaned up ${toRemove.size} old farts.`);
+    message.channel.send(`I've cleaned up ${toRemove.size} old farts.`);
 }
