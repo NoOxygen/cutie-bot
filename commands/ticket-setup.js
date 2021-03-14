@@ -2,7 +2,7 @@ exports.run = async(client, message, args) => {
     // ticket-setup #channel
     const Discord = require("discord.js");
 
-    if (!message.member.hasPermission('MANAGE_MESSAGES') || !message.member.roles.cache.some(r => ["aide", "staff"].includes(r.name)))
+    if (!message.member.hasPermission('MANAGE_CHANNELS'))
         return message.reply("you can't use this command.");
 
     let channel = message.mentions.channels.first();

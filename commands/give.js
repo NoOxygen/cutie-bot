@@ -1,6 +1,6 @@
 exports.run = async(client, message, args) => {
     // Limited to mods- adjust to your own preference!
-    if (!message.member.roles.cache.some(r => ["staff", "admin", "aide"].includes(r.name)))
+    if (!message.member.hasPermission('VIEW_AUDIT_LOG'))
         return message.reply("you can't use this command.");
 
     const user = message.mentions.users.first();
