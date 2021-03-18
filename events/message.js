@@ -39,7 +39,9 @@ module.exports = async(client, message) => {
         });
 
         if (message.content.length >= 7 && !message.content.startsWith(client.config.prefix)) {
-            await client.points.inc(`${key}.points`);
+            const oldP = await client.points.get(`${key}.points`)
+            let newP = oldP + 1
+            await client.points.set(`${key}.points`, newP);
         }
 
 
