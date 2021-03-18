@@ -34,7 +34,7 @@
         "random-puppy": "^1.1.0",
         "shelljs": "^0.8.4",
         "simple-youtube-api": "^5.2.1",
-        "soundcloud-downloader": "^0.1.6",
+        "soundcloud-downloader": "^0.2.4",
         "string-progressbar": "^1.0.3",
         "xmlhttprequest": "^1.8.0",
         "ytdl-core": "^4.5.0",
