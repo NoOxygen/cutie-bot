@@ -9,7 +9,7 @@ exports.run = (client, message) => {
     message.channel.send(`= Cutie Status =
 • Mem Usage  :: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB
 • Uptime     :: ${duration}
-• Servers    :: ${client.guilds.size.toLocaleString()}
+• Servers    :: ${client.guilds.cache.size.toLocaleString()}
 • Users      :: ${client.users.cache.size.toLocaleString()}
 • Github     :: https://github.com/Sid127/cutie-bot
 = Cutie was created by Sid <3 =`, {
