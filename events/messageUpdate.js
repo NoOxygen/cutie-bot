@@ -16,8 +16,8 @@ module.exports = async(client, oldMessage, newMessage) => {
         .addField(`New Message`, newMessage.content)
         .setTimestamp()
 
-    if (await !client.logger.has(`${key}`)) return;
-    if (await client.logger.get(`${key}.logChnl`) === null) return;
-    const sendChnl = await client.logger.get(`${key}.logChnl`)
+    if (await !client.settings.has(`${key}`)) return;
+    if (await client.settings.get(`${key}.logChnl`) === null) return;
+    const sendChnl = await client.settings.get(`${key}.logChnl`)
     client.channels.cache.get(sendChnl).send(embed)
 }

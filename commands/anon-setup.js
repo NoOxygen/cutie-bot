@@ -10,12 +10,12 @@ exports.run = async(client, message, args) => {
 
     const key = `${message.guild.id}`
         // Triggers on new servers we haven't seen before.
-    await client.confess.ensure(`${message.guild.id}`, {
+    await client.settings.ensure(`${message.guild.id}`, {
         guild: message.guild.id,
         anonChnl: `${confessChnl}`
     });
 
-    await client.confess.set(`${key}.anonChnl`, confessChnl);
+    await client.settings.set(`${key}.anonChnl`, confessChnl);
 
     const setChannel = `${client.config.prefix} anon ${key} [message]`
     const embed = new MessageEmbed()

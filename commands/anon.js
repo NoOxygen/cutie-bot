@@ -7,9 +7,9 @@ exports.run = async(client, message, [srvr, ...confession]) => {
             .setDescription(`${confession.join(" ")}`)
             .setTimestamp();
 
-        if (await client.confess.get(`${srvr}.anonChnl`) === null) return;
-        const sendSrvr = await client.confess.get(`${srvr}.guild`)
-        const sendChnl = await client.confess.get(`${srvr}.anonChnl`)
+        if (await client.settings.get(`${srvr}.anonChnl`) === null) return;
+        const sendSrvr = await client.settings.get(`${srvr}.guild`)
+        const sendChnl = await client.settings.get(`${srvr}.anonChnl`)
 
         if (srvr === sendSrvr) {
             client.channels.cache.get(sendChnl).send(embed).catch(console.error);

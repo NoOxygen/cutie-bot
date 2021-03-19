@@ -37,24 +37,6 @@ client.settings = new Josh({
         url: client.mongoUrl
     }
 });
-client.confess = new Josh({
-    name: 'Cutie',
-    provider,
-    providerOptions: {
-        collection: "confess",
-        dbName: "Cutie",
-        url: client.mongoUrl
-    }
-});
-client.logger = new Josh({
-    name: 'Cutie',
-    provider,
-    providerOptions: {
-        collection: "logger",
-        dbName: "Cutie",
-        url: client.mongoUrl
-    }
-});
 
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error(err);
