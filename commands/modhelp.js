@@ -29,6 +29,8 @@ ${header}
 **ticket-setup** - set ticket channel
 **modclose** - close ticket channel
 **logger** - set logging channel
+**bd-config** - setup birthdays
+**bd-override** Override a user's birthday info- 
 
 I believe these commands are pretty self explanatory :)`);
     message.channel.send(embed);

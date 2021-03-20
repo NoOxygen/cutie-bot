@@ -9,11 +9,6 @@ exports.run = async(client, message, args) => {
     if (!channel) return message.reply("Usage: `anon-setup #channel`");
 
     const key = `${message.guild.id}`
-        // Triggers on new servers we haven't seen before.
-    await client.settings.ensure(`${message.guild.id}`, {
-        guild: message.guild.id,
-        anonChnl: `${confessChnl}`
-    });
 
     await client.settings.set(`${key}.anonChnl`, confessChnl);
 

@@ -38,6 +38,16 @@ client.settings = new Josh({
     }
 });
 
+client.birthdays = new Josh({
+    name: 'Cutie',
+    provider,
+    providerOptions: {
+        collection: "birthdays",
+        dbName: "Cutie",
+        url: client.mongoUrl
+    }
+});
+
 fs.readdir("./events/", (err, files) => {
     if (err) return console.error(err);
     files.forEach(file => {
@@ -62,5 +72,40 @@ fs.readdir("./commands/", (err, files) => {
         client.commands.set(commandName, props);
     });
 });
+
+
+const { setIntervalAsync } = require('set-interval-async/dynamic')
+
+setIntervalAsync(async() => {
+        const moment = require("moment-timezone")
+        let month = moment().format('Do MMMM')
+        let db = await client.birthdays.filter(p => p.timezone)
+        for (ident of db) {
+            if (moment().tz((`${ident[1]['timezone']}`)).format(`Do MMMM`) !== `${ident[1]['date']}`) {
+                const sendGuild = `${ident[1]['guild']}`
+                const birbdayRole = await client.settings.get(`${sendGuild}.birthdayRole`)
+                let roleRemove = client.guilds.cache.get(sendGuild).roles.cache.get(birbdayRole)
+                let toRemove = roleRemove.members.map(m => m.user.id);
+                for (person of toRemove) {
+                    client.guilds.cache.get(sendGuild).members.cache.get(person).roles.remove(birbdayRole)
+                }
+            }
+            if (moment().tz((`${ident[1]['timezone']}`)).format(`Do MMMM`) === `${ident[1]['date']}`) {
+                const sendGuild = `${ident[1]['guild']}`
+                const birbdayFolk = `${ident[1]['username']}`
+                const msgChannel = await client.settings.get(`${sendGuild}.birthdayChnl`)
+                const birbdayRole = await client.settings.get(`${sendGuild}.birthdayRole`)
+
+                birbdayAt = `<@${birbdayFolk}>`
+                let birbdayFolk2 = client.guilds.cache.get(sendGuild).members.cache.get(birbdayFolk);
+                if (client.guilds.cache.get(sendGuild).members.cache.get(birbdayFolk).roles.cache.get(birbdayRole)) {
+                    continue
+                }
+                birbdayFolk2.roles.add(birbdayRole)
+                client.channels.cache.get(msgChannel).send(`Happy birthday, ${birbdayAt} :)`)
+            }
+        }
+    },
+    1800000)
 
 client.login(config.token);

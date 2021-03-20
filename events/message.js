@@ -38,6 +38,12 @@ module.exports = async(client, message) => {
             username: message.member.user.tag
         });
 
+        await client.settings.ensure(`${message.guild.id}`, {
+            guild: message.guild.id,
+            anonChnl: null,
+            logChnl: null
+        });
+
         if (message.content.length >= 7 && !message.content.startsWith(client.config.prefix)) {
             const oldP = await client.points.get(`${key}.points`)
             let newP = oldP + 1

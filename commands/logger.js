@@ -8,11 +8,6 @@ exports.run = async(client, message, args) => {
     let loggerChnl = channel.id;
 
     const key = `${message.guild.id}`
-        // Triggers on new servers we haven't seen before.
-    await client.settings.ensure(`${message.guild.id}`, {
-        guild: message.guild.id,
-        logChnl: `${loggerChnl}`
-    });
 
     await client.settings.set(`${key}.logChnl`, loggerChnl);
 

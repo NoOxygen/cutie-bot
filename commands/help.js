@@ -54,6 +54,12 @@ Its current prefix is "qt"
 **stop** - stops all music and clears queue
 **leave** - disconnect bot`
 
+    const birthday = `__*Birthdays*__
+
+**bd-set** - Registers your birth date
+**bd-when** - Displays the given user's birthday information
+**bd-remove** - Removes your birthday information from this bot`
+
     if (args.length < 1) {
         const embed = new MessageEmbed()
             .setTitle("**__CUTIE__**")
@@ -62,6 +68,8 @@ Its current prefix is "qt"
 ${header}
 
 ${music}
+
+${birthday}
 
 ${supportList}
 
@@ -112,6 +120,17 @@ ${oSS}`);
 ${header}
 
 ${music}
+
+${oSS}`);
+        message.channel.send(embed);
+    } else if (args[0] === "birthday") {
+        const embed = new MessageEmbed()
+            .setTitle("**__CUTIE__**")
+            .setColor(0xffd1dc)
+            .setDescription(`
+${header}
+
+${birthday}
 
 ${oSS}`);
         message.channel.send(embed);
