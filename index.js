@@ -84,11 +84,14 @@ setIntervalAsync(async() => {
             if (moment().tz((`${ident[1]['timezone']}`)).format(`Do MMMM`) !== `${ident[1]['date']}`) {
                 const sendGuild = `${ident[1]['guild']}`
                 const birbdayRole = await client.settings.get(`${sendGuild}.birthdayRole`)
-                let roleRemove = client.guilds.cache.get(sendGuild).roles.cache.get(birbdayRole)
-                let toRemove = roleRemove.members.map(m => m.user.id);
-                for (person of toRemove) {
-                    client.guilds.cache.get(sendGuild).members.cache.get(person).roles.remove(birbdayRole)
-                }
+                client.guilds.cache.get(sendGuild).fetch().then(srvr => {
+                    let roleRemove = srvr.roles.cache.get(birbdayRole)
+                    let toRemove = roleRemove.members.map(m => m.user.id);
+                    for (person of toRemove) {
+                        srvr.members.cache.get(person).roles.remove(birbdayRole)
+                    }
+                })
+
             }
             if (moment().tz((`${ident[1]['timezone']}`)).format(`Do MMMM`) === `${ident[1]['date']}`) {
                 const sendGuild = `${ident[1]['guild']}`
@@ -106,6 +109,6 @@ setIntervalAsync(async() => {
             }
         }
     },
-    1800000)
+    900000)
 
 client.login(config.token);
