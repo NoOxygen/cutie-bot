@@ -81,7 +81,7 @@ setIntervalAsync(async() => {
         let month = moment().format('Do MMMM')
         let db = await client.birthdays.filter(p => p.timezone)
         for (ident of db) {
-            if (moment().tz((`${ident[1]['timezone']}`)).format(`Do MMMM`) !== `${ident[1]['date']}`) {
+            if (moment().tz((`${ident[1]['timezone']}`)).format(`DD-MMM`) !== `${ident[1]['date']}`) {
                 const sendGuild = `${ident[1]['guild']}`
                 const birbdayRole = await client.settings.get(`${sendGuild}.birthdayRole`)
                 client.guilds.cache.get(sendGuild).fetch().then(srvr => {
@@ -93,7 +93,7 @@ setIntervalAsync(async() => {
                 })
 
             }
-            if (moment().tz((`${ident[1]['timezone']}`)).format(`Do MMMM`) === `${ident[1]['date']}`) {
+            if (moment().tz((`${ident[1]['timezone']}`)).format(`DD-MMM`) === `${ident[1]['date']}`) {
                 const sendGuild = `${ident[1]['guild']}`
                 const birbdayFolk = `${ident[1]['username']}`
                 const msgChannel = await client.settings.get(`${sendGuild}.birthdayChnl`)

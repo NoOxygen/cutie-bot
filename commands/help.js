@@ -56,7 +56,8 @@ Its current prefix is "qt"
 
     const birthday = `__*Birthdays*__
 
-**bd-set** - Registers your birth date
+**bd-set** - Registers your birth date in the format (date) [timezone]. Timezone is optional, defaults to UTC
+**bd-zone** - Sets your timezone
 **bd-when** - Displays the given user's birthday information
 **bd-remove** - Removes your birthday information from this bot`
 

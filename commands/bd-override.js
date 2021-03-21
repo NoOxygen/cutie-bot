@@ -2,10 +2,7 @@ exports.run = async(client, message, args) => {
     const moment = require("moment-timezone");
     require("moment-duration-format");
 
-    if (!message.member.hasPermission('ADMINISTRATOR'))
-        return message.reply("you can't use this command.");
-
-    await client.birthdays.ensure(`${message.guild.id}-${message.author.id}`, {
+    await client.birthdays.ensure(`${message.guild.id}-${message.mentions.members.first().id}`, {
         guild: message.guild.id,
         username: message.mentions.members.first().id,
         date: null,
@@ -14,15 +11,20 @@ exports.run = async(client, message, args) => {
 
 
     let Args = args.join(" ");
-    if (!Args) return message.channel.send("To get someone else's birthday set up, tell me when their birthday is in the `Do MMMM, Timezone` (17th October, Europe/London) format and tag them at the end of the message");
-    let date = Args.slice(0, Args.indexOf(","))
-    let timezone = Args.slice(Args.indexOf(",") + 2, Args.length)
+    if (!Args) return message.channel.send("To get your birthday set up, tell me when your birthday is in the `DD-MMM Timezone` (17-Aug Europe/London) format. Find your timezone here <https://xske.github.io/tz/> and copy/paste/type the exact same thing");
+    let date = Args.slice(0, Args.indexOf(" "))
+    let timezone = Args.slice(Args.indexOf(" ") + 1, Args.length)
 
-    if (moment(date, "Do MMMM").format("Do MMMM") !== date) {
-        message.channel.send("Please tell me the date in the Do MMMM format. Example: 17th October")
+    if (moment(date, "DD-MMM").format("DD-MMM") !== date) {
+        message.channel.send("Please tell me your date in the DD-MMM format. Example: 17-Aug")
     } else {
         await client.birthdays.set(`${message.guild.id}-${message.mentions.members.first().id}.date`, date)
-        await client.birthdays.set(`${message.guild.id}-${message.mentions.members.first().id}.timezone`, timezone)
-        message.channel.send("The birthday has been recorded!")
+        if (!timezone) {
+            await client.birthdays.set(`${message.guild.id}-${message.mentions.members.first().id}.timezone`, "Etc/UTC")
+        } else {
+            await client.birthdays.set(`${message.guild.id}-${message.mentions.members.first().id}.timezone`, timezone)
+        }
+
+        message.channel.send("Your birthday has been recorded!")
     }
 }
