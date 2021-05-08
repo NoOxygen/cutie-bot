@@ -83,7 +83,6 @@ setIntervalAsync(async() => {
 
         // these two variables are used in both cases
         const sendGuild = ident[1]['guild'];
-        console.log(sendGuild)
         const birthdayRole = await client.settings.get(`${sendGuild}.birthdayRole`);
 
         // user data we're targeting now

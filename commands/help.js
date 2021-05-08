@@ -1,6 +1,6 @@
 exports.run = (client, message, args) => {
     const { Client, MessageEmbed } = require('discord.js');
-    const header = `This bot is a homebrew bot and is being made by one (1) person as a community project/hobby. Support for the bot is NOT guaranteed.
+    const header = `This bot is a homebrew bot and is being made by one (1) person as a community project/hobby.
 
 Its current prefix is "qt"
 
@@ -59,7 +59,8 @@ Its current prefix is "qt"
 **bd-set** - Registers your birth date in the format (date) [timezone]. Timezone is optional, defaults to UTC
 **bd-zone** - Sets your timezone
 **bd-when** - Displays the given user's birthday information
-**bd-remove** - Removes your birthday information from this bot`
+**bd-remove** - Removes your birthday information from this bot
+**bd-upcoming** - Gets recent and upcoming birthdays`
 
     if (args.length < 1) {
         const embed = new MessageEmbed()
