@@ -77,38 +77,34 @@ fs.readdir("./commands/", (err, files) => {
 const { setIntervalAsync } = require('set-interval-async/dynamic')
 
 setIntervalAsync(async() => {
-        const moment = require("moment-timezone")
-        let month = moment().format('Do MMMM')
-        let db = await client.birthdays.filter(p => p.timezone)
-        for (ident of db) {
-            if (moment().tz((`${ident[1]['timezone']}`)).format(`DD-MMM`) !== `${ident[1]['date']}`) {
-                const sendGuild = `${ident[1]['guild']}`
-                const birbdayRole = await client.settings.get(`${sendGuild}.birthdayRole`)
-                client.guilds.cache.get(sendGuild).fetch().then(srvr => {
-                    let roleRemove = srvr.roles.cache.get(birbdayRole)
-                    let toRemove = roleRemove.members.map(m => m.user.id);
-                    for (person of toRemove) {
-                        srvr.members.cache.get(person).roles.remove(birbdayRole)
-                    }
-                })
+    const moment = require("moment-timezone")
+    let db = await client.birthdays.filter(p => p.timezone)
+    for (ident of db) {
 
+        // these two variables are used in both cases
+        const sendGuild = ident[1]['guild'];
+        console.log(sendGuild)
+        const birthdayRole = await client.settings.get(`${sendGuild}.birthdayRole`);
+
+        // user data we're targeting now
+        const birthdayFolk = client.guilds.cache.get(sendGuild).members.cache.get(ident[1]['username']);
+
+        // if statement for setting the role
+        if (moment().tz(ident[1]['timezone']).format('DD-MMM') === ident[1]['date']) {
+            // set role and send message
+            if (!birthdayFolk.roles.cache.get(birthdayRole)) {
+                birthdayFolk.roles.add(birthdayRole);
+
+                // get the channel where to send a message
+                const msgChannel = await client.settings.get(`${sendGuild}.birthdayChnl`);
+                client.channels.cache.get(msgChannel).send(`Happy Birthday, <@${ident[1]['username']}>`)
             }
-            if (moment().tz((`${ident[1]['timezone']}`)).format(`DD-MMM`) === `${ident[1]['date']}`) {
-                const sendGuild = `${ident[1]['guild']}`
-                const birbdayFolk = `${ident[1]['username']}`
-                const msgChannel = await client.settings.get(`${sendGuild}.birthdayChnl`)
-                const birbdayRole = await client.settings.get(`${sendGuild}.birthdayRole`)
-
-                birbdayAt = `<@${birbdayFolk}>`
-                let birbdayFolk2 = client.guilds.cache.get(sendGuild).members.cache.get(birbdayFolk);
-                if (client.guilds.cache.get(sendGuild).members.cache.get(birbdayFolk).roles.cache.get(birbdayRole)) {
-                    continue
-                }
-                birbdayFolk2.roles.add(birbdayRole)
-                client.channels.cache.get(msgChannel).send(`Happy birthday, ${birbdayAt} :)`)
+        } else { // else remove the role
+            if (birthdayFolk.roles.cache.get(birthdayRole)) {
+                birthdayFolk.roles.remove(birthdayRole);
             }
         }
-    },
-    900000)
+    }
+}, 900000);
 
 client.login(config.token);
