@@ -2,9 +2,6 @@ exports.run = (client, message, [mention, ...reason]) => {
   const moment = require("moment-timezone");
   actionDate = moment().tz('Europe/London').format('DD MMM YYYY hh:mm:ss')
 
-  if(!message.member.hasPermission('ADMINISTRATOR'))
-    return message.reply("you can't use this command.");
-
   if(!message.member.hasPermission('BAN_MEMBERS'))
     return message.reply("you can't use this command.");
 
