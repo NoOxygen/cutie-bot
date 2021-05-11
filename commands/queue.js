@@ -13,13 +13,13 @@ exports.run = (client, message) => {
 
   if (past.length === 0) {
 		const freshEmbed = new MessageEmbed()
-			.setTitle("Cutie Music Queue")
+			.setTitle("The Rainbow Connection Music Queue")
 			.addField("Queue", description)
 			.setColor("0xffd1dc");
 		message.channel.send(freshEmbed);
 	} else {
 		const queueEmbed = new MessageEmbed()
-			.setTitle("Cutie Music Queue")
+			.setTitle("The Rainbow Connection Music Queue")
 			.addField("Previously played", past)
 			.addField("Queue", description)
 			.setColor("0xffd1dc");

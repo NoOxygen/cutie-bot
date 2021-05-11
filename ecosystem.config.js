@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name: 'Cutie',
+    name: 'The Rainbow Connection',
 		script: 'index.js',
     watch: 'false',
 		log_file: 'log.log',

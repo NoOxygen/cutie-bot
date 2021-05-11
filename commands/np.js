@@ -16,7 +16,7 @@ exports.run = (client, message) => {
     .setTitle("Now playing")
     .setDescription(`${song.title}\n${song.url}`)
     .setColor("0xffd1dc")
-    .setAuthor("Cutie")
+    .setAuthor("The Rainbow Connection")
     .addField("\u200b", new Date(seek * 1000).toISOString().substr(11, 8) + "[" + createBar((song.duration == 0 ? seek : song.duration), seek, 20)[0] + "]" + (song.duration == 0 ? " ◉ LIVE" : new Date(song.duration * 1000).toISOString().substr(11, 8)), false);
 
   if (song.duration > 0) nowPlaying.setFooter("Time Remaining: " + new Date(left * 1000).toISOString().substr(11, 8));

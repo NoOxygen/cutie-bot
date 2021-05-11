@@ -1,4 +1,4 @@
-# Cutie - a general purpose Discord bot
+# The Rainbow Connection - a general purpose Discord bot
 
 Feel free to fork the repo and modify code according to your requirements.
 

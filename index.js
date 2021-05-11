@@ -20,30 +20,30 @@ client.mongoUrl = fs.readFileSync('./commandStorage/mongoUrl.txt').toString()
 // We also need to make sure we're attaching the config to the CLIENT so it's accessible everywhere!
 client.config = config;
 client.points = new Josh({
-    name: 'Cutie',
+    name: 'The Rainbow Connection',
     provider,
     providerOptions: {
         collection: "points",
-        dbName: "Cutie",
+        dbName: "TheRainbowConnection",
         url: client.mongoUrl
     }
 });
 client.settings = new Josh({
-    name: 'Cutie',
+    name: 'The Rainbow Connection',
     provider,
     providerOptions: {
         collection: "settings",
-        dbName: "Cutie",
+        dbName: "TheRainbowConnection",
         url: client.mongoUrl
     }
 });
 
 client.birthdays = new Josh({
-    name: 'Cutie',
+    name: 'The Rainbow Connection',
     provider,
     providerOptions: {
         collection: "birthdays",
-        dbName: "Cutie",
+        dbName: "TheRainbowConnection",
         url: client.mongoUrl
     }
 });
