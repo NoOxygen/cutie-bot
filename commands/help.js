@@ -1,10 +1,5 @@
 exports.run = (client, message, args) => {
     const { Client, MessageEmbed } = require('discord.js');
-    const header = `This bot is a homebrew bot and is being made by one (1) person as a community project/hobby.
-
-Its current prefix is "qt"
-
-***Current Command List:***`
 
     const supportList = `__*Support*__
 
@@ -26,8 +21,6 @@ Its current prefix is "qt"
 **leaderboard** - get the top 10 users on this server
 **levels** - get the full leaderboard as a one-time link
 **pronouns** - set your personal pronouns here`
-
-    const oSS = `This bot is open-source! Check out the source code at https://github.com/Sid127/cutie-bot`
 
     const colorList = `__*Colors*__
 
@@ -64,11 +57,9 @@ Its current prefix is "qt"
 
     if (args.length < 1) {
         const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
+            .setTitle("**__The Rainbow Connection__**")
             .setColor(0xffd1dc)
             .setDescription(`
-${header}
-
 ${music}
 
 ${birthday}
@@ -77,64 +68,42 @@ ${supportList}
 
 ${colorList}
 
-${miscList}
-
-${oSS}`);
+${miscList}`);
         message.channel.send(embed);
     } else if (args[0] === "misc") {
         const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
+            .setTitle("**__The Rainbow Connection__**")
             .setColor(0xffd1dc)
             .setDescription(`
-${header}
-
-${miscList}
-
-${oSS}`);
+${miscList}`);
         message.channel.send(embed);
     } else if (args[0] === "support") {
         const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
+            .setTitle("**__The Rainbow Connection__**")
             .setColor(0xffd1dc)
             .setDescription(`
-${header}
-
-${supportList}
-
-${oSS}`);
+${supportList}`);
         message.channel.send(embed);
     } else if (args[0] === "color") {
         const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
+            .setTitle("**__The Rainbow Connection__**")
             .setColor(0xffd1dc)
             .setDescription(`
-${header}
-
-${colorList}
-
-${oSS}`);
+${colorList}`);
         message.channel.send(embed);
     } else if (args[0] === "music") {
         const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
+            .setTitle("**__The Rainbow Connection__**")
             .setColor(0xffd1dc)
             .setDescription(`
-${header}
-
-${music}
-
-${oSS}`);
+${music}`);
         message.channel.send(embed);
     } else if (args[0] === "birthday") {
         const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
+            .setTitle("**__The Rainbow Connection__**")
             .setColor(0xffd1dc)
             .setDescription(`
-${header}
-
-${birthday}
-
-${oSS}`);
+${birthday}`);
         message.channel.send(embed);
     }
 }
