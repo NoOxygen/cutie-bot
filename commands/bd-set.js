@@ -18,10 +18,14 @@ exports.run = async(client, message, [date, ...timezone]) => {
 
         message.channel.send("Your birthday has been recorded!")
     } else {
-        await client.birthdays.set(`${message.guild.id}-${message.author.id}.date`, date)
-        await client.birthdays.set(`${message.guild.id}-${message.author.id}.timezone`, timezone)
-
-        message.channel.send("Your birthday has been recorded!")
+        if (timezone.includes('/')){
+            await client.birthdays.set(`${message.guild.id}-${message.author.id}.date`, date)
+            await client.birthdays.set(`${message.guild.id}-${message.author.id}.timezone`, timezone)
+    
+            message.channel.send("Your birthday has been recorded!")
+        } else {
+            return message.channel.send("Invalid timezone format :(\nFind your timezone here <https://xske.github.io/tz/>")
+        }        
     }
 }
 
