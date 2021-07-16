@@ -9,3 +9,17 @@ exports.run = (client, message, [mention]) => {
 		return message.channel.send(`${colormember.displayName} has the color ${color.hexColor}`)
 	}
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "currentcol",
+	category: "Colors",
+	description: "Send your (or another user's) current colors hex code",
+	usage: "currentcol <@User>"
+};

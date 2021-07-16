@@ -26,3 +26,17 @@ exports.run = (client, message, [mention, ...reason]) => {
 **date/time and timezone:** ${actionDate} GMT`).catch(console.error);
   });
 };
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "ban",
+	category: "Modmin",
+	description: "Bans a user",
+	usage: "ban [@user] <reason>"
+};

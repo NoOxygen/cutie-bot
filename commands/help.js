@@ -1,140 +1,57 @@
-exports.run = (client, message, args) => {
-    const { Client, MessageEmbed } = require('discord.js');
-    const header = `This bot is a homebrew bot and is being made by one (1) person as a community project/hobby.
+exports.run = (client, message, args, level) => {
+	// If no specific command is called, show all filtered commands.
+	if (!args[0]) {
+		// Filter all commands by which are available for the user's level, using the <Collection>.filter() method.
+		const myCommands = client.commands.filter(cmd => cmd.conf.guildOnly === true)
 
-Its current prefix is "qt"
+		// Here we have to get the command names only, and we use that array to get the longest name.
+		// This make the help commands "aligned" in the output.
+		const commandNames = myCommands.keyArray();
+		const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
 
-***Current Command List:***`
+		let currentCategory = "";
+		let output = `= Command List =\n\n[Use ${client.config.prefix}helpme <commandname> for details]\n`;
+		const sorted = myCommands.array().sort((p, c) => p.help.category > c.help.category ? 1 : p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1);
+		sorted.forEach(c => {
+			if (c.conf.permLevel !== "Modmin") {
+				const cat = c.help.category;
+				if (currentCategory !== cat) {
+					output += `\u200b\n== ${cat} ==\n`;
+					currentCategory = cat;
+				}
+				output += `${c.help.name}${" ".repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
+			}
+		});
+		message.channel.send(output, {
+			code: "asciidoc",
+			split: {
+				char: "\u200b"
+			}
+		});
+	} else {
+		// Show individual command's help.
+		let command = args[0];
+		if (client.commands.has(command)) {
+			command = client.commands.get(command);
+			// if (level < client.levelCache[command.conf.permLevel])
+			// 	return;
+			message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(", ")}\n= ${command.help.name} =`, {
+				code: "asciidoc"
+			});
+		}
+	}
+};
 
-    const supportList = `__*Support*__
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: ["h", "halp","helpme"],
+	permLevel: "User"
+};
 
-**spoilers** - tutorial on how to use spoilers
-**spoilers-guide** - info on when and where to use spoilers
-**hotlines** - sends a message with links containing helpline/hotlines from various countries
-**breathe** - sends 1 out of 3 gifs to breathe along to
-**graphics** - sends a randomized graphic containing helpful self-care info
-**coping** - sends a super short questionnaire to help you cope
-**distractme** - sends a cute video to help take your mind off of things`
-
-
-    const miscList = `__*Miscellaneous*__
-
-**ping** - checks if the bot is working or not
-**pfp** - get a user's profile picture
-**aww** - sends a random image/post from r/aww
-**points** - check your points on this server
-**leaderboard** - get the top 10 users on this server
-**levels** - get the full leaderboard as a one-time link
-**pronouns** - set your personal pronouns here`
-
-    const oSS = `This bot is open-source! Check out the source code at https://github.com/Sid127/cutie-bot`
-
-    const colorList = `__*Colors*__
-
-**colors** - brings up a list of some common hex codes
-**colorme <hex code>** - changes your color to your given hex code
-**currentcol** - reports your current color in hex
-**cleancol** - removes your color`
-
-    const music = `__*Music*__
-
-**play** - plays a song/playlist by name/url
-**pause**
-**resume** - the _play_ command does NOT resume
-**playlist** - plays a playlist from url
-**np** - shows info on current track
-**lyrics** - attempts to find lyrics for the song
-**loop** - toggle queue loop
-**queue** - get queue
-**remove** - remove a song from the queue
-**search**
-**shuffle**
-**skip**
-**back**
-**stop** - stops all music and clears queue
-**leave** - disconnect bot`
-
-    const birthday = `__*Birthdays*__
-
-**bd-set** - Registers your birth date in the format (date) [timezone]. Timezone is optional, defaults to UTC
-**bd-zone** - Sets your timezone
-**bd-when** - Displays the given user's birthday information
-**bd-remove** - Removes your birthday information from this bot
-**bd-upcoming** - Gets recent and upcoming birthdays`
-
-    if (args.length < 1) {
-        const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
-            .setColor(0xffd1dc)
-            .setDescription(`
-${header}
-
-${music}
-
-${birthday}
-
-${supportList}
-
-${colorList}
-
-${miscList}
-
-${oSS}`);
-        message.channel.send(embed);
-    } else if (args[0] === "misc") {
-        const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
-            .setColor(0xffd1dc)
-            .setDescription(`
-${header}
-
-${miscList}
-
-${oSS}`);
-        message.channel.send(embed);
-    } else if (args[0] === "support") {
-        const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
-            .setColor(0xffd1dc)
-            .setDescription(`
-${header}
-
-${supportList}
-
-${oSS}`);
-        message.channel.send(embed);
-    } else if (args[0] === "color") {
-        const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
-            .setColor(0xffd1dc)
-            .setDescription(`
-${header}
-
-${colorList}
-
-${oSS}`);
-        message.channel.send(embed);
-    } else if (args[0] === "music") {
-        const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
-            .setColor(0xffd1dc)
-            .setDescription(`
-${header}
-
-${music}
-
-${oSS}`);
-        message.channel.send(embed);
-    } else if (args[0] === "birthday") {
-        const embed = new MessageEmbed()
-            .setTitle("**__CUTIE__**")
-            .setColor(0xffd1dc)
-            .setDescription(`
-${header}
-
-${birthday}
-
-${oSS}`);
-        message.channel.send(embed);
-    }
-}
+exports.help = {
+	name: "help",
+	category: "Miscellaneous",
+	description: "Displays all the available commands for your permission level.",
+	usage: "help <command>"
+};

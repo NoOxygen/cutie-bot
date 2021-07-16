@@ -20,3 +20,17 @@ exports.run = async(client, message, args) => {
 ${setChannel}`)
     message.channel.send(embed)
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "anon-setup",
+	category: "Modmin",
+	description: "Set up a channel for anonymous messaging",
+	usage: "anon-setup [#channel]"
+};

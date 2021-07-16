@@ -16,3 +16,17 @@ exports.run = (client, message, args) => {
   var vid = Math.floor(Math.random() * distraction.length);
   message.channel.send(distraction[vid]);
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: ["distract me"],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "distract me",
+	category: "Miscellaneous",
+	description: "Send a cute animal video to help you distract yourself",
+	usage: "distractme"
+};

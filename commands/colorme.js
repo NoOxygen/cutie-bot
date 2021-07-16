@@ -31,3 +31,17 @@ exports.run = (client, message, args) => {
       }).catch(console.error);
     }
   }
+
+  exports.conf = {
+    enabled: true,
+    guildOnly: true,
+    aliases: ["colourme"],
+    permLevel: "User"
+  };
+  
+  exports.help = {
+    name: "colorme",
+    category: "Colors",
+    description: "Set your color with a hex code",
+    usage: "colorme ff6961"
+  };

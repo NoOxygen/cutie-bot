@@ -17,3 +17,17 @@ exports.run = (client, message, args) => {
     message.channel.send("I'm sure you didn't create me");
   }
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "reload",
+	category: "Modmin",
+	description: "Reload a command to incorporate new changes",
+	usage: "reload [command name]"
+};

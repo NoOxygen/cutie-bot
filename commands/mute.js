@@ -12,3 +12,17 @@ exports.run = (client, message, [mention, ...reason]) => {
     muteMember.roles.add(muteRole).catch(console.error);
     message.channel.send(`Muted.`);
 };
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "mute",
+	category: "Modmin",
+	description: "Mute a user",
+	usage: "mute [@user]"
+};

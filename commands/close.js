@@ -11,7 +11,21 @@ exports.run = (client, message) => {
             allow: ["VIEW_CHANNEL", "SEND_MESSAGES"]
         }
     ]);
-    message.channel.send("This channel has been archived for staff to check for any rule-breaking. Once it has been checked, the staff is expected to manually close the channel using `qt modclose`")
+    message.channel.send(`This channel has been archived for staff to check for any rule-breaking. Once it has been checked, the staff is expected to manually close the channel using ${client.config.prefix}modclose`)
     var name = message.author.id;
     exports.name = name;
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: false,
+	aliases: [],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "close",
+	category: "Miscellaneous",
+	description: "Closes a ticket channel",
+	usage: "close"
+};

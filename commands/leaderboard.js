@@ -78,3 +78,17 @@ exports.run = async(client, message, args) => {
         leaderboard.reactions.removeAll().catch(console.error);
     });
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: ["ranks"],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "leaderboard",
+	category: "Miscellaneous",
+	description: "Shows the current leaderboard",
+	usage: "leaderboard"
+};

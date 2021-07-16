@@ -16,3 +16,17 @@ exports.run = async(client, message, [srvr, ...confession]) => {
         }
     } else {}
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: false,
+	aliases: [],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "anon",
+	category: "Miscellaneous",
+	description: "Sends an anonymous message - DM command only",
+	usage: "Check the anon channel for usage info"
+};

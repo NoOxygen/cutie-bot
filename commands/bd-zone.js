@@ -13,3 +13,17 @@ exports.run = async(client, message, args) => {
         return message.channel.send("Invalid timezone format :(")
     }
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+    permLevel: "User"
+};
+
+exports.help = {
+	name: "bd-zone",
+	category: "Birthdays",
+	description: "Add/change your recorded timezone",
+	usage: "bd-zone [tz-database timezone]\nExample: bd-zone Asia/Calcutta"
+};

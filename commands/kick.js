@@ -26,3 +26,17 @@ exports.run = (client, message, [mention, ...reason]) => {
 **date/time and timezone:** ${actionDate} GMT`).catch(console.error);
   });
 };
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "kick",
+	category: "Modmin",
+	description: "Kick a user",
+	usage: "kick [@user] <reason>"
+};

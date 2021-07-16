@@ -18,3 +18,17 @@ exports.run = async(client, message, args) => {
 
     message.channel.send(`I've cleaned up ${toRemove.size} old farts.`);
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "cleanup",
+	category: "Modmin",
+	description: "Clean up the leaderboard",
+	usage: "cleanup"
+};

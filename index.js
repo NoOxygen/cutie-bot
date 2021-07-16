@@ -58,20 +58,44 @@ fs.readdir("./events/", (err, files) => {
 });
 
 client.commands = new Enmap();
+client.aliases = new Enmap();
 
-fs.readdir("./commands/", (err, files) => {
-    if (err) return console.error(err);
-    files.forEach(file => {
-        if (!file.endsWith(".js")) return;
-        // Load the command file itself
-        let props = require(`./commands/${file}`);
-        // Get just the command name from the file name
-        let commandName = file.split(".")[0];
-        console.log(`Attempting to load command ${commandName}`);
-        // Here we simply store the whole thing in the command Enmap. We're not running it right now.
-        client.commands.set(commandName, props);
+loadCommand = (commandName) => {
+    try {
+        const props = require(`./commands/${commandName}`);
+        console.log(`Loading Command: ${props.help.name}`);
+        if (props.init) {
+            props.init(client);
+        }
+        client.commands.set(props.help.name, props);
+        props.conf.aliases.forEach(alias => {
+            client.aliases.set(alias, props.help.name);
+        });
+        return false;
+    } catch (e) {
+        return `Unable to load command ${commandName}: ${e}`;
+    }
+};
+
+// Here we load **commands** into memory, as a collection, so they're accessible
+// here and everywhere else.
+const {
+	promisify
+} = require("util");
+const readdir = promisify(require("fs").readdir);
+
+const init = async() => {
+    const cmdFiles = await readdir("./commands/");
+    cmdFiles.forEach(f => {
+        if (!f.endsWith(".js"))
+            return;
+        const response = loadCommand(f);
+        if (response)
+            console.log(response);
     });
-});
+}
+
+init();
 
 
 const { setIntervalAsync } = require('set-interval-async/dynamic')

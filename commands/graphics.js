@@ -12,3 +12,17 @@ exports.run = (client, message, args) => {
   var img = Math.floor(Math.random() * graphics_img.length);
   message.channel.send(graphics_img[img]);
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "graphics",
+	category: "Miscellaneous",
+	description: "Send a graphic with coping tips",
+	usage: "graphics"
+};

@@ -1,37 +1,57 @@
-exports.run = (client, message, [mention, ...reason]) => {
-    const { Client, MessageEmbed } = require('discord.js');
+exports.run = (client, message, args, level) => {
+	// If no specific command is called, show all filtered commands.
+	if (!args[0]) {
+		// Filter all commands by which are available for the user's level, using the <Collection>.filter() method.
+		const myCommands = client.commands.filter(cmd => cmd.conf.guildOnly === true)
 
-    if (!message.member.hasPermission('VIEW_AUDIT_LOG'))
-        return message.reply("you can't use this command.");
+		// Here we have to get the command names only, and we use that array to get the longest name.
+		// This make the help commands "aligned" in the output.
+		const commandNames = myCommands.keyArray();
+		const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
 
-    const header = `This bot is a homebrew bot and is being made by one (1) person as a community project/hobby.
+		let currentCategory = "";
+		let output = `= Command List =\n\n[Use ${client.config.prefix}helpme <commandname> for details]\n`;
+		const sorted = myCommands.array().sort((p, c) => p.help.category > c.help.category ? 1 : p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1);
+		sorted.forEach(c => {
+			if (c.conf.permLevel === "Modmin") {
+				const cat = c.help.category;
+				if (currentCategory !== cat) {
+					output += `\u200b\n== ${cat} ==\n`;
+					currentCategory = cat;
+				}
+				output += `${c.help.name}${" ".repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
+			}
+		});
+		message.channel.send(output, {
+			code: "asciidoc",
+			split: {
+				char: "\u200b"
+			}
+		});
+	} else {
+		// Show individual command's help.
+		let command = args[0];
+		if (client.commands.has(command)) {
+			command = client.commands.get(command);
+			// if (level < client.levelCache[command.conf.permLevel])
+			// 	return;
+			message.channel.send(`= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(", ")}\n= ${command.help.name} =`, {
+				code: "asciidoc"
+			});
+		}
+	}
+};
 
-Its current prefix is "qt"
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: ["mh", "modhalp","modhelpme"],
+	permLevel: "Modmin"
+};
 
-***Current Command List:***`
-
-    const embed = new MessageEmbed()
-        .setTitle("**__CUTIE__**")
-        .setColor(0xffd1dc)
-        .setDescription(`
-${header}
-
-**kick**
-**ban**
-**mute**
-**unmute**
-**clear** - make sure you include the command message as a message to be deleted too
-**announce** - make an announcement
-**give** - give a user points
-**takeaway** - remove points from a user
-**cleanup** - remove leaderboard data of users that haven't been active in a month
-**anon-setup** - set anon channel
-**ticket-setup** - set ticket channel
-**modclose** - close ticket channel
-**logger** - set logging channel
-**bd-config** - setup birthdays
-**bd-override** Override a user's birthday info- 
-
-I believe these commands are pretty self explanatory :)`);
-    message.channel.send(embed);
-}
+exports.help = {
+	name: "modhelp",
+	category: "Miscellaneous",
+	description: "Displays all the available commands for your permission level.",
+	usage: "modhelp <command>"
+};

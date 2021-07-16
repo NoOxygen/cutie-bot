@@ -12,3 +12,17 @@ exports.run = async(client, message, [mention]) => {
         return await message.channel.send(`${keyMember.displayName} currently has ${point})} points, and is level ${lvl}!`);
     }
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "points",
+	category: "Miscellaneous",
+	description: "Check a user's points. If no user is mentioned, check yours",
+	usage: "points <@user>"
+};

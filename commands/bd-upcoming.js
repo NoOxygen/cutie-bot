@@ -16,3 +16,17 @@ exports.run = async(client, message) => {
     }
     message.channel.send(recup)
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+    permLevel: "User"
+};
+
+exports.help = {
+	name: "bd-upcoming",
+	category: "Birthdays",
+	description: "Displays upcoming and recent birthdays",
+	usage: "bd-upcoming"
+};

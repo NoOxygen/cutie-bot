@@ -24,3 +24,17 @@ exports.run = (client, message, [param, ...announcement]) => {
     message.guild.channels.cache.get(channel.id).send(embed)
   }
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: ["megaphone", "decree"],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "announce",
+	category: "Modmin",
+	description: "Sends an announcement to a specified channel",
+	usage: "announce <@everyone> [#channel] [announcement]"
+};

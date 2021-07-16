@@ -9,3 +9,17 @@ exports.run = async(client, message, args, level) => {
         message.channel.send(`Your birthday is on ${date}!`)
     }
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+    permLevel: "User"
+};
+
+exports.help = {
+	name: "bd-when",
+	category: "Birthdays",
+	description: "Finds a user's birthday. If no user is specified, finds your birthday",
+	usage: "bd-when <user>"
+};

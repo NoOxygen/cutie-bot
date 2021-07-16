@@ -15,3 +15,17 @@ exports.run = async(client, message, args, level) => { // eslint-disable-line no
         verifyMember.roles.add(message.guild.roles.cache.find(role => role.name === "senior citizen"))
     } else {}
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: ["recruit", "sacrifice"],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "verify",
+	category: "Modmin",
+	description: "Verifies a user",
+	usage: "verify [@user]"
+};

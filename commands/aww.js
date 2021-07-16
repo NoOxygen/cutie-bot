@@ -5,3 +5,17 @@ exports.run = (clients, message, args) => {
 	        message.channel.send(url);
 	    })
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "aww",
+	category: "Miscellaneous",
+	description: "Sends random media from r/aww",
+	usage: "aww"
+};

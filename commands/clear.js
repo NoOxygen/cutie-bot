@@ -21,3 +21,17 @@ exports.run = async(client, message, args) => {
             .catch(console.error); // Bulk deletes all messages that have been fetched and are not older than 14 days (due to the Discord API)
     });
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: ["purge"],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "clear",
+	category: "Modmin",
+	description: "Bulk delete messages",
+	usage: "clear [number of messages to delete]"
+};

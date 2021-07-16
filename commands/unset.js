@@ -16,3 +16,17 @@ exports.run = async(client, message, args) => {
         message.channel.send("You aren't doing it right - the command is `qt unset <anon/logger>`")
     }
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "unset",
+	category: "Modmin",
+	description: "Removes anonymous/logging channel",
+	usage: "unset anon\nunset logger"
+};

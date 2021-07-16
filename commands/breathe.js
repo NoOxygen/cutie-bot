@@ -7,3 +7,17 @@ exports.run = (client, message, args) => {
   var gif = Math.floor(Math.random() * breathe_gif.length);
   message.channel.send(breathe_gif[gif]);
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "breathe",
+	category: "Miscellaneous",
+	description: "Sends a gif to breathe along to",
+	usage: "breathe"
+};

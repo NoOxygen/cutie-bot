@@ -17,3 +17,17 @@ exports.run = async(client, message, args) => {
         .setDescription(`Logs channel set to <#${channel.id}>.`)
     message.channel.send(embed)
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "logger",
+	category: "Modmin",
+	description: "Sets up an audit log in a specified channel",
+	usage: "logger [#channel]"
+};

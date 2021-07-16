@@ -90,3 +90,17 @@ exports.run = async(client, message, args, level) => {
     }
 
 };
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: ["pronouns", "my pronouns are"],
+	permLevel: "User"
+};
+
+exports.help = {
+	name: "pronoun",
+	category: "Miscellaneous",
+	description: "Set your pronouns from a preset list",
+	usage: "pronoun <pronouns>"
+};

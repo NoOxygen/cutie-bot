@@ -12,3 +12,17 @@ exports.run = (client, message, [chnl, ...text]) => {
 		});
 	}, timeout)
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: ["mimic", "utter"],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "say",
+	category: "Modmin",
+	description: "Send a message in another channel as Cutie",
+	usage: "say [#channel] [message]"
+};

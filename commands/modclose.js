@@ -20,3 +20,17 @@ Verified by: <@${message.author.id}>`)
     client.channels.cache.get(logChannel).send(embed);
     closer.name = '';
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: false,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "modclose",
+	category: "Modmin",
+	description: "Closes a ticket channel",
+	usage: "modclose"
+};

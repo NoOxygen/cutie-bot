@@ -16,3 +16,17 @@ exports.run = async(client, message, args) => {
     await client.settings.set(`${message.guild.id}-ticket`, sent.id);
     message.channel.send("Ticket system setup done!")
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "ticket-setup",
+	category: "Modmin",
+	description: "Setup Ticket channels",
+	usage: "ticket-setup [#channel]"
+};

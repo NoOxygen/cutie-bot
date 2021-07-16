@@ -11,3 +11,17 @@ exports.run = async(client, message, args) => {
         message.channel.send("Birthday channel set!")
     }
 }
+
+exports.conf = {
+	enabled: true,
+	guildOnly: true,
+	aliases: [],
+	permLevel: "Modmin"
+};
+
+exports.help = {
+	name: "bd-config",
+	category: "Modmin",
+	description: "Set up birthday stuff",
+	usage: "bd-config role [@birthday role]\nbd-config channel [#birthday channel]"
+};
