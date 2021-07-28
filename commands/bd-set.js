@@ -18,14 +18,10 @@ exports.run = async(client, message, [date, ...timezone]) => {
 
         message.channel.send("Your birthday has been recorded!")
     } else {
-        if (timezone.includes('/')){
-            await client.birthdays.set(`${message.guild.id}-${message.author.id}.date`, date)
-            await client.birthdays.set(`${message.guild.id}-${message.author.id}.timezone`, timezone)
-    
-            message.channel.send("Your birthday has been recorded!")
-        } else {
-            return message.channel.send("Invalid timezone format :(\nFind your timezone here <https://xske.github.io/tz/>")
-        }        
+        await client.birthdays.set(`${message.guild.id}-${message.author.id}.date`, date)
+        await client.birthdays.set(`${message.guild.id}-${message.author.id}.timezone`, timezone)
+
+        message.channel.send("Your birthday has been recorded!")
     }
 }
 
@@ -40,5 +36,5 @@ exports.help = {
 	name: "bd-set",
 	category: "Birthdays",
 	description: "Adds your birthday information. Timezone is optional, defaults to UTC",
-	usage: "bd-set [date-Mon], <tz-database timezone>\nExample: bd-set 17-Aug, Asia/Calcutta"
+	usage: "bd-set [date-Mon], <tz-database timezone>\nExample: bd-set 17-Aug Asia/Calcutta"
 };
